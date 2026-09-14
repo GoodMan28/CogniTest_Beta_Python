@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     mongodb_uri: str
     jwt_secret: str
     institute_id: str
-    allowed_origins: list[str]
+    allowed_origins: str | list[str]
 
     @field_validator("allowed_origins", mode="before")
     @classmethod
