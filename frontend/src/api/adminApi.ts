@@ -4,7 +4,9 @@ import axios from 'axios';
  * Axios instance for admin API calls.
  * Automatically attaches the admin JWT from localStorage.
  */
-const adminApi = axios.create();
+const adminApi = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000'
+});
 
 adminApi.interceptors.request.use((config) => {
   const token = localStorage.getItem('adminToken');

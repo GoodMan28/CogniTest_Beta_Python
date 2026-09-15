@@ -81,7 +81,7 @@ const QuestionBank = () => {
     setPage(1);
     setExpandedId(null);
     adminApi.get('/api/v1/questions/units', { params: { subject: activeSubject } })
-      .then(res => setUnits(res.data))
+      .then(res => setUnits(Array.isArray(res.data) ? res.data : []))
       .catch(err => console.error('Failed to fetch units:', err));
   }, [activeSubject]);
 
@@ -90,7 +90,7 @@ const QuestionBank = () => {
     setTopicFilter('');
     setPage(1);
     adminApi.get('/api/v1/questions/chapters', { params: { subject: activeSubject, unit: unitFilter } })
-      .then(res => setChapters(res.data))
+      .then(res => setChapters(Array.isArray(res.data) ? res.data : []))
       .catch(err => console.error('Failed to fetch chapters:', err));
   }, [activeSubject, unitFilter]);
 
@@ -99,7 +99,7 @@ const QuestionBank = () => {
     setPage(1);
     if (chapterFilter) {
       adminApi.get('/api/v1/questions/topics', { params: { subject: activeSubject, chapter: chapterFilter } })
-        .then(res => setTopics(res.data))
+        .then(res => setTopics(Array.isArray(res.data) ? res.data : []))
         .catch(err => console.error('Failed to fetch topics:', err));
     } else {
       setTopics([]);
@@ -120,9 +120,9 @@ const QuestionBank = () => {
           topic: topicFilter || undefined,
         }
       });
-      setQuestions(res.data.questions);
-      setTotalPages(res.data.pagination.totalPages);
-      setTotal(res.data.pagination.total);
+      setQuestions(Array.isArray(res.data?.questions) ? res.data.questions : []);
+      setTotalPages(res.data?.pagination?.totalPages || 1);
+      setTotal(res.data?.pagination?.total || 0);
     } catch (err) {
       console.error('Failed to fetch questions:', err);
     } finally {

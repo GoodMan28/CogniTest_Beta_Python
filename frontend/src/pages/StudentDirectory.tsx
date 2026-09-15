@@ -27,7 +27,7 @@ const StudentDirectory = () => {
         const res = await adminApi.get('/api/v1/students', {
           params: { search, batch: batchFilter }
         });
-        setStudents(res.data);
+        setStudents(Array.isArray(res.data) ? res.data : []);
       } catch (error) {
         console.error('Failed to fetch students:', error);
       }
