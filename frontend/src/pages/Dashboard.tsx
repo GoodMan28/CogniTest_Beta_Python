@@ -173,7 +173,7 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
-              {recentTests.map((test) => (
+              {(Array.isArray(recentTests) ? recentTests : []).map((test) => (
                 <tr key={test._id} className="hover:bg-gray-50 transition-colors">
                   <td className="px-6 py-4 font-medium text-gray-900">{test.title}</td>
                   <td className="px-6 py-4">{test.examType}</td>
