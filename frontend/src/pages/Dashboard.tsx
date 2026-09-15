@@ -51,7 +51,7 @@ const Dashboard = () => {
           <div className="flex justify-between items-start">
             <div>
               <p className="text-sm font-medium text-gray-500">Active Students</p>
-              <h3 className="text-3xl font-black text-gray-900 mt-1">{stats.activeStudents.toLocaleString()}</h3>
+              <h3 className="text-3xl font-black text-gray-900 mt-1">{(stats.activeStudents || 0).toLocaleString()}</h3>
             </div>
             <div className="p-3 bg-blue-50 text-blue-600 rounded-lg">
               <span className="material-symbols-outlined">group</span>
@@ -66,7 +66,7 @@ const Dashboard = () => {
           <div className="flex justify-between items-start">
             <div>
               <p className="text-sm font-medium text-gray-500">Tests Conducted</p>
-              <h3 className="text-3xl font-black text-gray-900 mt-1">{stats.testsConducted.toLocaleString()}</h3>
+              <h3 className="text-3xl font-black text-gray-900 mt-1">{(stats.testsConducted || 0).toLocaleString()}</h3>
             </div>
             <div className="p-3 bg-indigo-50 text-indigo-600 rounded-lg">
               <span className="material-symbols-outlined">description</span>
@@ -81,7 +81,7 @@ const Dashboard = () => {
           <div className="flex justify-between items-start">
             <div>
               <p className="text-sm font-medium text-gray-500">Avg. Batch Score</p>
-              <h3 className="text-3xl font-black text-gray-900 mt-1">{stats.averageScore}%</h3>
+              <h3 className="text-3xl font-black text-gray-900 mt-1">{stats.averageScore || 0}%</h3>
             </div>
             <div className="p-3 bg-green-50 text-green-600 rounded-lg">
               <span className="material-symbols-outlined">monitoring</span>
@@ -118,11 +118,11 @@ const Dashboard = () => {
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
           <h3 className="text-lg font-bold text-gray-800 mb-6">Needs Attention</h3>
           <div className="space-y-4">
-            {stats.needsAttention.length === 0 ? (
+            {(stats.needsAttention || []).length === 0 ? (
               <p className="text-sm text-gray-500">No students found.</p>
             ) : (
               <>
-                {stats.needsAttention.map((student, i) => (
+                {(stats.needsAttention || []).map((student, i) => (
                   <div key={i} className="flex items-start justify-between border-b border-gray-100 pb-4 last:border-0 last:pb-0">
                     <div>
                       <p className="text-sm font-bold text-gray-900">{student.name}</p>
