@@ -1,11 +1,11 @@
 
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Beaker, FileOutput, Settings, Library, LogOut } from 'lucide-react';
+import { LayoutDashboard, Beaker, FileOutput, Settings, Library, LogOut, X } from 'lucide-react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
-const StudentSidebar = () => {
+const StudentSidebar = ({ isOpen, onClose }: { isOpen?: boolean; onClose?: () => void }) => {
   const [institute, setInstitute] = useState<{ name: string; logoUrl?: string } | null>(null);
   const { logout } = useAuth();
 
@@ -17,22 +17,40 @@ const StudentSidebar = () => {
 
   const navItems = [
     { name: 'My Dashboard', path: '/student', icon: LayoutDashboard },
+    { name: 'My Reports', path: '/student/reports', icon: FileOutput },
     { name: 'Custom Tests', path: '/student/custom-tests', icon: Beaker },
     { name: 'Mock Tests Library', path: '/student/tests', icon: Library },
-    { name: 'My Reports', path: '/student/reports', icon: FileOutput },
     { name: 'Settings', path: '/student/settings', icon: Settings },
   ];
 
   return (
-    <aside className="w-[240px] h-screen border-r border-gray-200 flex flex-col fixed left-0 top-0 z-50 bg-[#FAFAFA]">
-      <div className="px-4 pt-6 pb-2">
-        {institute?.logoUrl ? (
-          <img src={(institute.logoUrl?.startsWith("data:") ? institute.logoUrl : `${import.meta.env.VITE_API_URL || ''}${institute.logoUrl}`)} alt={institute.name || 'Institute Logo'} className="w-full h-auto max-h-32 object-contain object-left" />
-        ) : (
-          <h1 className="text-xl font-semibold text-gray-900 tracking-tight">{institute?.name || 'Loading...'}</h1>
-        )}
-        <p className="text-[13px] text-gray-500 mt-2">Student Portal</p>
-      </div>
+    <>
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          onClick={onClose}
+        />
+      )}
+      <aside className={`
+        w-[240px] h-screen border-r border-gray-200 flex flex-col fixed left-0 top-0 z-50 bg-[#FAFAFA]
+        transition-transform duration-300 ease-in-out
+        ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+      `}>
+        <div className="px-4 pt-6 pb-2 flex items-center justify-between">
+          <div className="flex-1">
+            {institute?.logoUrl ? (
+              <img src={(institute.logoUrl?.startsWith("data:") ? institute.logoUrl : `${import.meta.env.VITE_API_URL || ''}${institute.logoUrl}`)} alt={institute.name || 'Institute Logo'} className="w-full h-auto max-h-32 object-contain object-left" />
+            ) : (
+              <h1 className="text-xl font-semibold text-gray-900 tracking-tight">{institute?.name || 'Loading...'}</h1>
+            )}
+            <p className="text-[13px] text-gray-500 mt-2">Student Portal</p>
+          </div>
+          {onClose && (
+            <button onClick={onClose} className="md:hidden p-2 text-gray-400 hover:text-gray-900">
+              <X className="w-5 h-5" />
+            </button>
+          )}
+        </div>
       <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
         {navItems.map((item) => (
           <NavLink
@@ -61,6 +79,7 @@ const StudentSidebar = () => {
         </button>
       </div>
     </aside>
+    </>
   );
 };
 

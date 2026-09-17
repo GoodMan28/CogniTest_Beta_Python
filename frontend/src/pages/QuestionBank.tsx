@@ -314,7 +314,7 @@ const QuestionBank = () => {
                         {/* Expanded Detail Panel */}
                         {isExpanded && (
                           <div className={`border-t ${colors.border} px-6 py-5 ${colors.bg}`}>
-                            <div className="grid grid-cols-12 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                               {/* Left: Question + Options */}
                               <div className="col-span-8">
                                 <div className="flex flex-wrap gap-1.5 mb-3">
@@ -369,7 +369,7 @@ const QuestionBank = () => {
                                 )}
 
                                 {/* Options */}
-                                <div className="grid grid-cols-2 gap-2">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                   {q.options.map((opt, i) => {
                                     const letter = String.fromCharCode(65 + i);
                                     const isCorrect = q.correctOption === letter || q.correctOption === opt;
@@ -402,7 +402,7 @@ const QuestionBank = () => {
                                 {q.optionsMedia && q.optionsMedia.some(m => m !== null) && (
                                   <div className="mt-3 p-3 bg-white rounded-lg border border-gray-200">
                                     <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Option Media</p>
-                                    <div className="grid grid-cols-2 gap-2">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                       {q.optionsMedia.map((m, i) => m && (
                                         <div key={i} className="p-2 border border-gray-100 rounded">
                                           <p className="text-[10px] text-gray-400 mb-1">Option {String.fromCharCode(65 + i)}</p>

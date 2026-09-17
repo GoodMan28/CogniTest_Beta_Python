@@ -50,7 +50,7 @@ export default function TemplateBuilder({ onComplete, onSaveOnly }: Props) {
     <div className="bg-white rounded-lg shadow border border-gray-200">
       <div className="p-6">
         <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Template Name <span className="text-red-500">*</span></label>
               <input
@@ -163,7 +163,7 @@ export default function TemplateBuilder({ onComplete, onSaveOnly }: Props) {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <div className="grid grid-cols-1 md:grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
             <div>
               <span className="block text-sm font-medium text-gray-500">Total Questions</span>
               <span className="text-2xl font-bold text-gray-900">{totalQuestions}</span>

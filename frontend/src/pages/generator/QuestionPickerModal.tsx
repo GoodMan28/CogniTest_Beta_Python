@@ -243,7 +243,7 @@ export default function QuestionPickerModal({ section, initialSelectedIds, onSav
                       </div>
 
                       {q.options && q.options.length > 0 && (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3">
+                        <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-2 mt-3">
                           {q.options.map((opt: string, i: number) => {
                             const labels = ['A', 'B', 'C', 'D'];
                             const isCorrect = q.correctOption === opt || q.correctOption === labels[i];

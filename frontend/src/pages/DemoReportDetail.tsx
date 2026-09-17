@@ -101,7 +101,7 @@ const DemoReportDetail = () => {
       <StrengthsAndImprovements report={report} />
 
       {/* ── Revision Priorities + Breakdowns ── */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
           <BreakdownTable report={report} />
         </div>

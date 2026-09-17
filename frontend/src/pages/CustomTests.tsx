@@ -219,7 +219,7 @@ const CustomTests = () => {
           <p className="text-gray-500 mt-1">Generate a personalized test targeting your weak areas using vector similarity search.</p>
         </div>
 
-        <div className="grid grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* Config Panel */}
           <div className="col-span-12 lg:col-span-5 space-y-6 relative">
             {isLocked && (
@@ -228,7 +228,7 @@ const CustomTests = () => {
                   <span className="material-symbols-outlined text-3xl">lock</span>
                 </div>
                 <h4 className="font-bold text-gray-800 text-lg">Feature Locked</h4>
-                <p className="text-sm text-gray-600 mt-2 max-w-[250px]">
+                <p className="text-sm text-gray-600 mt-2 w-full max-w-full md:max-w-[250px]">
                   Custom AI and Filter Tests require a Premium coaching plan.
                 </p>
               </div>
@@ -268,7 +268,7 @@ const CustomTests = () => {
               {/* Subject Selection */}
               <div className="mb-6">
                 <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Subject</label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                   {(['Physics', 'Chemistry', 'Mathematics'] as const).map(s => {
                     const isActive = subject === s;
                     let activeClasses = '';
@@ -296,7 +296,7 @@ const CustomTests = () => {
               {/* Number of Questions */}
               <div className="mb-6">
                 <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Questions</label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                   {([10, 15, 20] as const).map(n => {
                     let activeClasses = '';
                     if (subject === 'Physics') activeClasses = 'bg-blue-500 text-white border-transparent shadow-md';
@@ -533,7 +533,7 @@ const CustomTests = () => {
           <p className="text-sm text-gray-500 mb-8">{subject} · {questions.length} Questions{timed ? ` · Timed` : ''}</p>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <div className="bg-green-50 rounded-xl p-4 border border-green-200">
               <p className="text-2xl font-black text-green-600">{results.correct}</p>
               <p className="text-xs font-bold text-green-700 mt-1">Correct</p>
@@ -609,7 +609,7 @@ const CustomTests = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* Question Card */}
         <div className="col-span-12 lg:col-span-9">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
@@ -661,7 +661,7 @@ const CustomTests = () => {
               <div className="mb-6 p-4 bg-white rounded-lg border border-gray-200 inline-block max-w-full overflow-hidden">
                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Diagram</p>
                 <div
-                  className="max-w-[400px]"
+                  className="w-full max-w-full md:max-w-[400px]"
                   dangerouslySetInnerHTML={{ __html: currentQuestion.diagramSvg }}
                 />
               </div>
@@ -742,7 +742,7 @@ const CustomTests = () => {
             {currentQuestion.optionsMedia && currentQuestion.optionsMedia.some((m: any) => m !== null) && (
               <div className="mt-4 p-3 bg-white rounded-lg border border-gray-200">
                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Option Media</p>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   {currentQuestion.optionsMedia.map((media: any, idx: number) => {
                     if (!media) return (
                       <div key={idx} className="p-2 border border-gray-100 rounded-md bg-gray-50 flex items-center justify-center text-xs text-gray-400">
@@ -753,7 +753,7 @@ const CustomTests = () => {
                       <div key={idx} className="p-2 border border-gray-200 rounded-md bg-white">
                         <p className="text-xs font-bold text-gray-500 mb-2 border-b border-gray-100 pb-1">Option {optionLabels[idx]}</p>
                         {media.type === 'svg' && (
-                          <div dangerouslySetInnerHTML={{ __html: media.content }} className="max-w-[150px]" />
+                          <div dangerouslySetInnerHTML={{ __html: media.content }} className="w-full max-w-full md:max-w-[150px]" />
                         )}
                         {media.type === 'smiles' && (
                           <div className="flex flex-col items-center">
@@ -846,7 +846,7 @@ const CustomTests = () => {
         <div className="col-span-12 lg:col-span-3">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sticky top-6">
             <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Question Navigator</h4>
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-2">
               {questions.map((_, idx) => {
                 const isAnswered = answers[idx] !== undefined;
                 const isCurrent = idx === currentIndex;

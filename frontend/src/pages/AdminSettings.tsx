@@ -392,7 +392,7 @@ const AdminSettings = () => {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Global Default Scheme</label>
                   <p className="text-xs text-gray-500 mb-4">This will be applied to all new tests unless overridden during test creation.</p>
-                  <div className="grid grid-cols-2 gap-4 mt-2">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
                     <div>
                       <span className="text-xs text-gray-500">Correct Answer Marks</span>
                       <input type="number" defaultValue="4" className="w-full px-4 py-2 border border-gray-300 rounded focus:ring-green-500 focus:border-green-500" />
@@ -411,7 +411,7 @@ const AdminSettings = () => {
             <div className="max-w-2xl animate-in fade-in duration-300">
               <h3 className="text-xl font-bold text-gray-800 mb-6 border-b border-gray-200 pb-2">Usage & Billing</h3>
               
-              <div className="grid grid-cols-2 gap-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="p-5 border border-blue-200 bg-blue-50 rounded-xl">
                   <h4 className="text-sm font-bold text-blue-900 mb-1">Current Plan</h4>
                   <div className="text-2xl font-black text-blue-700 mb-2">Enterprise Plus</div>
@@ -471,7 +471,7 @@ const AdminSettings = () => {
                     </select>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">Questions PDF</label>
                       <input 
@@ -529,7 +529,7 @@ const AdminSettings = () => {
 
                 {ingestionStatus && (
                   <div className="space-y-6">
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                       <div className="bg-white p-4 rounded-lg border border-gray-200 text-center shadow-sm">
                         <div className="text-3xl font-black text-gray-800">{ingestionStatus.total}</div>
                         <div className="text-xs font-bold text-gray-500 uppercase mt-1">Total PDFs</div>

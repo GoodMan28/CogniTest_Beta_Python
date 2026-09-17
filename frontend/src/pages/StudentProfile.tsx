@@ -244,13 +244,13 @@ const StudentAnalytics = () => {
           {student.profilePictureUrl ? (
             <img src={(student.profilePictureUrl?.startsWith("data:") ? student.profilePictureUrl : `${import.meta.env.VITE_API_URL || ''}${student.profilePictureUrl}`)} alt={student.name} className="w-20 h-20 rounded-full border-4 border-white shadow-sm object-cover" />
           ) : (
-            <div className="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-3xl border-4 border-white shadow-sm">
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-2xl md:text-3xl border-4 border-white shadow-sm">
               {student.name.charAt(0)}
             </div>
           )}
           <div>
             <h2 className="text-2xl font-bold text-gray-800">{student.name}</h2>
-            <div className="flex items-center gap-3 mt-2">
+            <div className="flex flex-wrap items-center gap-2 mt-2">
               <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-medium">Batch: {student.batch}</span>
               <span className="flex items-center gap-1 text-xs font-medium text-gray-500">
                 <span className="material-symbols-outlined text-[16px]">pin</span> {student.enrollmentNo}
@@ -280,10 +280,10 @@ const StudentAnalytics = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         
         <div className="col-span-12 lg:col-span-8 flex flex-col gap-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* Card 1: Interactive SVG Radar Chart */}
             <section className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 h-[420px] flex flex-col relative">
@@ -307,7 +307,7 @@ const StudentAnalytics = () => {
               )}
 
               <div className="flex-1 flex items-center justify-center bg-gray-50/50 rounded-lg border border-gray-100 relative overflow-hidden">
-                <svg className="w-full h-full max-w-[280px] max-h-[250px]" viewBox="0 0 300 270">
+                <svg className="w-full h-full w-full max-w-full md:max-w-[280px] md:max-h-[250px]" viewBox="0 0 300 270">
                   {/* Grid Lines */}
                   {gridPaths.map((path, i) => (
                     <polygon key={i} points={path} className="fill-none stroke-gray-200 stroke-[1]" />
@@ -411,7 +411,7 @@ const StudentAnalytics = () => {
                       <div key={idx} className={wrapperClass}>
                         <div className="space-y-1">
                           <div className="flex justify-between text-xs font-semibold text-gray-700">
-                            <span className="truncate max-w-[70%]">{cm.chapter}</span>
+                            <span className="truncate max-w-[60%] md:max-w-[70%]">{cm.chapter}</span>
                             <span className={`px-2 py-0.5 rounded text-[10px] ${bgColor} ${textColor}`}>{cm.accuracyPercentage}% ({cm.totalAttempted} Qs)</span>
                           </div>
                           <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
@@ -437,7 +437,7 @@ const StudentAnalytics = () => {
               <h3 className="text-lg font-bold text-gray-800 mb-6 flex items-center gap-2">
                 <span className="material-symbols-outlined text-blue-600">psychology</span> Semantic SWOT Analysis
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-1 md:grid-cols-2 gap-6">
                 
                 <div className="bg-green-50/50 rounded-lg p-5 border border-green-200/50">
                   <h4 className="text-sm font-bold text-green-700 uppercase tracking-wider mb-4 flex items-center gap-2">

@@ -298,7 +298,7 @@ const Tests = () => {
 
           <h3 className="text-xl font-bold text-gray-800 mb-4">Ingest New Test Paper</h3>
           
-          <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div className="border border-gray-200 rounded-lg p-4 bg-gray-50 flex flex-col items-center justify-center text-center">
               <span className="material-symbols-outlined text-gray-400 text-3xl mb-2">description</span>
               <p className="text-sm font-medium text-gray-700 mb-1">Question Paper PDF</p>
@@ -327,7 +327,7 @@ const Tests = () => {
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Date *</label>
                 <input 
@@ -351,7 +351,7 @@ const Tests = () => {
               </div>
             </div>
             
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Source Exam</label>
                 <input 
@@ -461,7 +461,7 @@ const Tests = () => {
                    </div>
                    <p className="text-sm text-gray-500 text-center mb-6">5 student OMR sheets successfully processed.</p>
                    
-                   <div className="border border-gray-200 rounded-lg overflow-hidden mb-6 bg-white">
+                   <div className="border border-gray-200 rounded-lg overflow-x-auto mb-6 bg-white">
                      <table className="w-full text-left text-xs">
                        <thead className="bg-gray-50 text-gray-500 uppercase tracking-wider font-semibold">
                          <tr>

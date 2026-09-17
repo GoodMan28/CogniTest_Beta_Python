@@ -513,7 +513,7 @@ const Reports = () => {
           </div>
 
           {/* Performance Summary */}
-          <div className="grid grid-cols-3 gap-6 mb-8 page-break-inside-avoid">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 page-break-inside-avoid">
             <div className="border border-gray-300 rounded-xl p-4 text-center">
               <div className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-1">Total Score</div>
               <div className="text-3xl font-black text-gray-900">{report.score} <span className="text-lg text-gray-500">/ {report.totalMarks}</span></div>
@@ -529,7 +529,7 @@ const Reports = () => {
           </div>
 
           {/* Quick Stats Strip (Print Version) */}
-          <div className="grid grid-cols-4 gap-6 mb-8 page-break-inside-avoid">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 page-break-inside-avoid">
             {[
               { label: 'Correct', val: correctCount },
               { label: 'Incorrect', val: incorrectCount },
@@ -546,7 +546,7 @@ const Reports = () => {
           {/* Subject Performance (Print Version) */}
           <div className="mb-8 page-break-inside-avoid">
             <h3 className="text-xl font-bold text-gray-900 mb-4 border-b border-gray-200 pb-2">Subject Performance Analytics</h3>
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {subjectStats.map((sub, i) => (
                 <div key={i} className="border border-gray-300 rounded-xl p-4">
                   <div className="flex justify-between items-start mb-3">
@@ -582,7 +582,7 @@ const Reports = () => {
           {/* Topic Mastery (Print Version) */}
           <div className="mb-8 page-break-inside-avoid">
             <h3 className="text-xl font-bold text-gray-900 mb-4 border-b border-gray-200 pb-2">Topic Mastery</h3>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="border border-green-200 bg-green-50/50 rounded-xl p-4">
                 <h4 className="text-sm font-bold text-green-800 uppercase tracking-widest mb-3 flex items-center gap-2">
                   <span className="material-symbols-outlined text-[18px]">trending_up</span> Strongest Topics
@@ -645,11 +645,11 @@ const Reports = () => {
 
                 {q.diagramSvg && (
                   <div className="mb-4 pl-12">
-                    <div className="max-w-[400px] border border-gray-200 p-2 rounded bg-white" dangerouslySetInnerHTML={{ __html: q.diagramSvg }} />
+                    <div className="w-full max-w-full md:max-w-[400px] border border-gray-200 p-2 rounded bg-white" dangerouslySetInnerHTML={{ __html: q.diagramSvg }} />
                   </div>
                 )}
 
-                <div className="grid grid-cols-2 gap-4 pl-12 mb-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pl-12 mb-4">
                   {q.options.map((opt: string, i: number) => {
                     const letter = String.fromCharCode(65 + i);
                     const isCorrect = q.correctOption === letter;
@@ -712,8 +712,8 @@ const Reports = () => {
                 <span className="material-symbols-outlined text-[18px]">arrow_back</span>
                 Back to Reports
               </button>
-              <div className="flex items-center gap-3">
-                <span className="text-sm font-bold text-gray-700 bg-white px-4 py-1.5 rounded-lg border border-gray-200 shadow-sm print:hidden">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                <span className="text-sm font-bold text-gray-700 bg-white px-4 py-1.5 rounded-lg border border-gray-200 shadow-sm print:hidden truncate max-w-[200px] md:max-w-none">
                   Review: {test.title}
                 </span>
                 <button
@@ -730,7 +730,7 @@ const Reports = () => {
             </div>
 
             {/* Tabs */}
-            <div className="flex gap-6 border-b border-gray-200 px-2">
+            <div className="flex gap-6 border-b border-gray-200 px-2 overflow-x-auto whitespace-nowrap scrollbar-hide">
               {['Overview', ...subjectList].map(tab => (
                 <button
                   key={tab}
@@ -754,13 +754,13 @@ const Reports = () => {
                   <div className="inline-block px-3 py-1 bg-blue-50 text-blue-600 text-xs font-black rounded-full mb-3 uppercase tracking-widest border border-blue-100">
                     Test Result
                   </div>
-                  <h1 className="text-2xl font-black text-gray-900 mb-1">{test.title}</h1>
+                  <h1 className="text-xl md:text-2xl font-black text-gray-900 mb-1 leading-tight break-words">{test.title}</h1>
                   <p className="text-gray-500 font-medium text-sm">
                     Completed on {new Date(report.createdAt).toLocaleDateString()}
                   </p>
                 </div>
-                <div className="flex items-center gap-8 bg-gray-50 px-8 py-5 rounded-xl border border-gray-100">
-                  <div className="text-center pr-8 border-r border-gray-200">
+                <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-8 bg-gray-50 px-4 py-4 md:px-8 md:py-5 rounded-xl border border-gray-100">
+                  <div className="text-center sm:pr-8 border-b sm:border-b-0 sm:border-r border-gray-200 pb-4 sm:pb-0">
                     <div className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Total Score</div>
                     <div className="text-4xl font-black text-gray-900">{report.score}</div>
                     <div className="text-xs font-bold text-gray-500 mt-1">/ {report.totalMarks}</div>
@@ -777,7 +777,7 @@ const Reports = () => {
               {analysis ? (
                 <ScoreboardSection analysis={analysis} />
               ) : (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 md:grid-cols-4 gap-4">
                   {[
                     { label: 'Correct', val: correctCount, color: 'text-green-600', bg: 'bg-green-50', border: 'border-green-100' },
                     { label: 'Incorrect', val: incorrectCount, color: 'text-red-600', bg: 'bg-red-50', border: 'border-red-100' },
@@ -795,7 +795,7 @@ const Reports = () => {
               {/* Subject Performance */}
               <div>
                 <h3 className="text-lg font-black text-gray-800 mb-4 tracking-tight">Subject Performance</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-1 md:grid-cols-3 gap-6">
                   {subjectStats.map((sub, i) => {
                     const theme = getTheme(sub.subject);
                     return (
@@ -902,7 +902,7 @@ const Reports = () => {
                 </>
               )}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Topic Mastery */}
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col">
                   <div className="flex justify-between items-center mb-6">
@@ -1098,7 +1098,7 @@ const Reports = () => {
                                 {/* Row Details (Visible on click) */}
                                 {isExpanded && (
                                   <div className="border-t border-gray-100 px-8 py-6 bg-gray-50/40">
-                                    <div className="grid grid-cols-12 gap-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                                       {/* Left Side: Question, Diagrams, and Options */}
                                       <div className="col-span-8 space-y-4">
                                         <div className="flex gap-2 items-center flex-wrap">
@@ -1140,7 +1140,7 @@ const Reports = () => {
                                         {q.diagramSvg && (
                                           <div className="p-4 bg-white rounded-xl border border-gray-200 inline-block max-w-full overflow-hidden">
                                             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Diagram</p>
-                                            <div className="max-w-[400px]" dangerouslySetInnerHTML={{ __html: q.diagramSvg }} />
+                                            <div className="w-full max-w-full md:max-w-[400px]" dangerouslySetInnerHTML={{ __html: q.diagramSvg }} />
                                           </div>
                                         )}
 
@@ -1164,7 +1164,7 @@ const Reports = () => {
                                             </div>
                                           </div>
                                         ) : (
-                                          <div className="grid grid-cols-2 gap-3 mt-4">
+                                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
                                             {q.options?.map((opt: string, i: number) => {
                                             const letter = String.fromCharCode(65 + i);
                                             const isCorrect = q.correctOption === letter;
@@ -1278,7 +1278,7 @@ const Reports = () => {
 
                           {mq.diagramSvg && (
                             <div className="ml-10 mb-4 p-3 bg-white rounded-xl border border-gray-200 inline-block max-w-full overflow-hidden">
-                              <div className="max-w-[360px]" dangerouslySetInnerHTML={{ __html: mq.diagramSvg }} />
+                              <div className="w-full max-w-full md:max-w-[360px]" dangerouslySetInnerHTML={{ __html: mq.diagramSvg }} />
                             </div>
                           )}
 
@@ -1491,7 +1491,7 @@ const Reports = () => {
         </header>
 
         {/* Top Summary Metrics Row */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100">
               <span className="material-symbols-outlined text-[28px]">assessment</span>
@@ -1555,10 +1555,10 @@ const Reports = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* Left Area */}
           <div className="col-span-12 lg:col-span-8 flex flex-col gap-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-1 md:grid-cols-2 gap-6">
 
               {/* Radar Chart */}
               <section className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 h-[420px] flex flex-col relative">
@@ -1800,7 +1800,7 @@ const Reports = () => {
               <h2 className="text-xl font-bold text-gray-900">Sample PDF Preview</h2>
               <p className="text-sm text-gray-500">{samplePdfData.test.title} — {samplePdfData.questions.length} Questions</p>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
               <button
                 onClick={() => window.print()}
                 className="px-5 py-2.5 bg-gray-900 text-white rounded-xl font-bold text-sm hover:bg-gray-800 transition-colors flex items-center gap-2 shadow-sm"
@@ -1859,7 +1859,7 @@ const Reports = () => {
 
                   {q.diagramSvg && (
                     <div className="mb-4 pl-12">
-                      <div className="max-w-[400px] border border-gray-200 p-2 rounded bg-white inline-block" dangerouslySetInnerHTML={{ __html: q.diagramSvg }} />
+                      <div className="w-full max-w-full md:max-w-[400px] border border-gray-200 p-2 rounded bg-white inline-block" dangerouslySetInnerHTML={{ __html: q.diagramSvg }} />
                     </div>
                   )}
 
@@ -1870,7 +1870,7 @@ const Reports = () => {
                       </span>
                     </div>
                   ) : (
-                    <div className="grid grid-cols-2 gap-3 pl-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pl-12">
                       {q.options.map((opt: string, i: number) => {
                         const letter = String.fromCharCode(65 + i);
                         return (
@@ -1891,7 +1891,7 @@ const Reports = () => {
             {/* Answer Key */}
             <div className="mt-12 border-t-2 border-gray-900 pt-8 page-break-inside-avoid">
               <h3 className="text-xl font-bold text-gray-900 mb-6">Answer Key</h3>
-              <div className="grid grid-cols-5 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
                 {samplePdfData.questions.map((q: any) => (
                   <div key={q.questionId} className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2">
                     <span className="text-xs font-bold text-gray-500">Q{q.questionNo}</span>
@@ -1920,7 +1920,7 @@ const Reports = () => {
               <h2 className="text-xl font-bold text-gray-900">Analytics Report Preview</h2>
               <p className="text-sm text-gray-500">{printAnalyticsData.testTitle} — {printAnalyticsData.totalReports} Students</p>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
               <button
                 onClick={() => window.print()}
                 className="px-5 py-2.5 bg-gray-900 text-white rounded-xl font-bold text-sm hover:bg-gray-800 transition-colors flex items-center gap-2 shadow-sm"
@@ -1959,7 +1959,7 @@ const Reports = () => {
             </div>
 
             {/* Summary Stats */}
-            <div className="grid grid-cols-4 gap-4 mb-10 page-break-inside-avoid">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10 page-break-inside-avoid">
               {[
                 { label: 'Average Score', val: `${printAnalyticsData.averageScore} / ${printAnalyticsData.totalMarks}`, sub: `${Math.round((printAnalyticsData.averageScore / printAnalyticsData.totalMarks) * 100)}%`, color: 'border-blue-300 bg-blue-50' },
                 { label: 'Highest Score', val: printAnalyticsData.highestScore, sub: 'Topper', color: 'border-green-300 bg-green-50' },
@@ -2016,7 +2016,7 @@ const Reports = () => {
                   </table>
 
                   {swot && (swot.strengths.length > 0 || swot.criticalWeaknesses.length > 0) && (
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {swot.strengths.length > 0 && (
                         <div className="bg-green-50 border border-green-200 rounded-lg p-3">
                           <div className="text-xs font-bold uppercase text-green-700 mb-2">&#9650; Strengths</div>

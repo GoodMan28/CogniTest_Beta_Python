@@ -36,24 +36,24 @@ const ScoreSummary = ({ report }: ScoreSummaryProps) => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mb-8">
         <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-100">
           <div className="text-xs font-medium text-indigo-500 uppercase tracking-wider mb-1">🏆 Marks Scored</div>
-          <div className="text-2xl font-bold text-indigo-700">
+          <div className="text-xl md:text-2xl font-bold text-indigo-700">
             {summary.score}<span className="text-base text-indigo-400">/{summary.maximumMarks}</span>
           </div>
         </div>
 
         <div className="p-4 bg-purple-50 rounded-lg border border-purple-100">
           <div className="text-xs font-medium text-purple-500 uppercase tracking-wider mb-1">🎯 Accuracy</div>
-          <div className="text-2xl font-bold text-purple-700">{accuracy}</div>
+          <div className="text-xl md:text-2xl font-bold text-purple-700">{accuracy}</div>
         </div>
 
         <div className="p-4 bg-teal-50 rounded-lg border border-teal-100">
           <div className="text-xs font-medium text-teal-500 uppercase tracking-wider mb-1">📈 Attempt</div>
-          <div className="text-2xl font-bold text-teal-700">{attempt}</div>
+          <div className="text-xl md:text-2xl font-bold text-teal-700">{attempt}</div>
         </div>
 
         <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
           <div className="text-xs font-medium text-blue-500 uppercase tracking-wider mb-1">📝 Questions</div>
-          <div className="text-2xl font-bold text-blue-700">{summary.questionCount}</div>
+          <div className="text-xl md:text-2xl font-bold text-blue-700">{summary.questionCount}</div>
         </div>
       </div>
 
@@ -62,17 +62,17 @@ const ScoreSummary = ({ report }: ScoreSummaryProps) => {
         <div className="grid grid-cols-3 gap-3">
           <div className="p-4 bg-green-50 rounded-lg border-2 border-green-200 text-center">
             <div className="text-green-500 text-lg mb-1">✓</div>
-            <div className="text-2xl font-bold text-green-700">{summary.correct}</div>
+            <div className="text-xl md:text-2xl font-bold text-green-700">{summary.correct}</div>
             <div className="text-xs text-green-600 font-medium">Questions Correct</div>
           </div>
           <div className="p-4 bg-red-50 rounded-lg border-2 border-red-200 text-center">
             <div className="text-red-500 text-lg mb-1">✗</div>
-            <div className="text-2xl font-bold text-red-700">{summary.incorrect}</div>
+            <div className="text-xl md:text-2xl font-bold text-red-700">{summary.incorrect}</div>
             <div className="text-xs text-red-600 font-medium">Questions Incorrect</div>
           </div>
           <div className="p-4 bg-gray-50 rounded-lg border-2 border-gray-200 text-center">
             <div className="text-gray-400 text-lg mb-1">○</div>
-            <div className="text-2xl font-bold text-gray-700">{summary.skipped}</div>
+            <div className="text-xl md:text-2xl font-bold text-gray-700">{summary.skipped}</div>
             <div className="text-xs text-gray-600 font-medium">Questions Unattempted</div>
           </div>
         </div>
