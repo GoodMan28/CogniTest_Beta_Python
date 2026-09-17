@@ -8,6 +8,9 @@ import 'katex/dist/katex.min.css';
 
 import mockRecommendations from '../data/mockRecommendations.json';
 import MarkdownText from '../components/MarkdownText';
+import { Sheet } from '../components/ui/Sheet';
+import { PageContainer } from '../components/ui/PageContainer';
+import { PageHeader } from '../components/ui/PageHeader';
 import type { PracticeQuestion, ReportAnalysis } from '../types/reportAnalysis';
 import ScoreboardSection from '../components/analysis/ScoreboardSection';
 import SubjectWiseSection from '../components/analysis/SubjectWiseSection';
@@ -691,7 +694,7 @@ const Reports = () => {
         </div>
 
         {/* === INTERACTIVE UI (HIDDEN IN PDF) === */}
-        <div className="print:hidden flex flex-col min-w-0 w-full h-full overflow-hidden">
+        <div className="print:hidden flex flex-col min-w-0 w-full">
           {/* Header Navigation */}
           <div className="flex flex-col gap-6 mb-6">
             <div className="flex items-center justify-between">
@@ -747,25 +750,25 @@ const Reports = () => {
           </div>
 
           {activeTab === 'Overview' ? (
-            <div className="space-y-8 animate-in fade-in duration-300 overflow-y-auto pr-2 pb-10">
+            <div className="space-y-8 animate-in fade-in duration-300 pb-10">
               {/* Hero Stats */}
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100 gap-6">
-                <div>
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100 gap-6 w-full min-w-0">
+                <div className="min-w-0 w-full flex-1">
                   <div className="inline-block px-3 py-1 bg-blue-50 text-blue-600 text-xs font-black rounded-full mb-3 uppercase tracking-widest border border-blue-100">
                     Test Result
                   </div>
-                  <h1 className="text-xl md:text-2xl font-black text-gray-900 mb-1 leading-tight break-words">{test.title}</h1>
+                  <h1 className="text-xl md:text-2xl font-black text-gray-900 mb-1 leading-tight break-words sm:break-normal hyphens-auto">{test.title}</h1>
                   <p className="text-gray-500 font-medium text-sm">
                     Completed on {new Date(report.createdAt).toLocaleDateString()}
                   </p>
                 </div>
-                <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-8 bg-gray-50 px-4 py-4 md:px-8 md:py-5 rounded-xl border border-gray-100">
-                  <div className="text-center sm:pr-8 border-b sm:border-b-0 sm:border-r border-gray-200 pb-4 sm:pb-0">
+                <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-8 bg-gray-50 px-4 py-4 md:px-8 md:py-5 rounded-xl border border-gray-100 shrink-0 w-full md:w-auto">
+                  <div className="text-center w-full sm:w-auto sm:pr-8 border-b sm:border-b-0 sm:border-r border-gray-200 pb-4 sm:pb-0">
                     <div className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Total Score</div>
                     <div className="text-4xl font-black text-gray-900">{report.score}</div>
                     <div className="text-xs font-bold text-gray-500 mt-1">/ {report.totalMarks}</div>
                   </div>
-                  <div className="text-center">
+                  <div className="text-center w-full sm:w-auto">
                     <div className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Accuracy</div>
                     <div className="text-3xl font-black text-blue-600">{accuracy}%</div>
                     <div className="text-xs font-bold text-gray-500 mt-1">{totalAttempted} Attempted</div>
@@ -795,11 +798,11 @@ const Reports = () => {
               {/* Subject Performance */}
               <div>
                 <h3 className="text-lg font-black text-gray-800 mb-4 tracking-tight">Subject Performance</h3>
-                <div className="grid grid-cols-1 md:grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 min-w-0 w-full">
                   {subjectStats.map((sub, i) => {
                     const theme = getTheme(sub.subject);
                     return (
-                      <div key={i} className={`bg-white rounded-xl border ${theme.lightBorder} p-6 shadow-sm relative overflow-hidden group`}>
+                      <div key={i} className={`bg-white rounded-xl border ${theme.lightBorder} p-6 shadow-sm relative overflow-hidden group min-w-0 w-full`}>
                         <div className={`absolute top-0 left-0 w-1 h-full ${theme.bg} opacity-50`} />
                         <div className="flex justify-between items-start mb-6">
                           <h4 className={`text-xl font-black ${theme.color}`}>{sub.subject}</h4>
@@ -815,10 +818,10 @@ const Reports = () => {
                               <div className={`h-full ${theme.bg} rounded-full`} style={{ width: `${sub.accuracy}%` }} />
                             </div>
                           </div>
-                          <div className="flex gap-4 pt-2 text-xs font-bold">
-                            <span className="text-green-600 flex items-center gap-1"><span className="material-symbols-outlined text-[14px]">check_circle</span> {sub.correct}</span>
-                            <span className="text-red-500 flex items-center gap-1"><span className="material-symbols-outlined text-[14px]">cancel</span> {sub.incorrect}</span>
-                            <span className="text-gray-400 flex items-center gap-1"><span className="material-symbols-outlined text-[14px]">hourglass_empty</span> {sub.unanswered}</span>
+                          <div className="flex flex-wrap gap-4 pt-2 text-xs font-bold">
+                            <span className="text-green-600 flex items-center gap-1 shrink-0"><span className="material-symbols-outlined text-[14px]">check_circle</span> {sub.correct}</span>
+                            <span className="text-red-500 flex items-center gap-1 shrink-0"><span className="material-symbols-outlined text-[14px]">cancel</span> {sub.incorrect}</span>
+                            <span className="text-gray-400 flex items-center gap-1 shrink-0"><span className="material-symbols-outlined text-[14px]">hourglass_empty</span> {sub.unanswered}</span>
                           </div>
                         </div>
                       </div>
@@ -1038,44 +1041,42 @@ const Reports = () => {
               </div>
 
               {/* Question Review List (Interactive rendering like Question Bank) */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex-1 min-h-0">
-                <div className="overflow-auto h-full">
-                  <table className="w-full text-left border-collapse table-fixed">
-                    <thead className="sticky top-0 z-10 bg-gray-50/95 border-b border-gray-200 backdrop-blur-sm">
-                      <tr className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-                        <th className="p-4 w-20">Q.No</th>
-                        <th className="p-4">Question Text</th>
-                        <th className="p-4 w-40">Subject</th>
-                        <th className="p-4 w-40 text-center">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-100 text-sm">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 flex-1 min-h-0 flex flex-col">
+                <div className="flex-1 overflow-y-auto">
+                  <div className="min-w-full text-left">
+                    <div className="hidden md:flex sticky top-0 z-10 bg-gray-50/95 border-b border-gray-200 backdrop-blur-sm text-xs font-bold text-gray-500 uppercase tracking-wider">
+                      <div className="p-4 w-20 shrink-0">Q.No</div>
+                      <div className="p-4 flex-1 min-w-0">Question Text</div>
+                      <div className="p-4 w-40 shrink-0">Subject</div>
+                      <div className="p-4 w-40 shrink-0 text-center">Status</div>
+                    </div>
+                    <ul className="divide-y divide-gray-100 text-sm">
                       {filteredQuestions.length === 0 ? (
-                        <tr>
-                          <td colSpan={4} className="p-12 text-center text-gray-400">
-                            No questions found matching this category.
-                          </td>
-                        </tr>
+                        <li className="p-12 text-center text-gray-400">
+                          No questions found matching this category.
+                        </li>
                       ) : (
                         filteredQuestions.map((q: any) => {
                           const isExpanded = expandedQuestionId === q.questionId;
                           const truncatedText = q.questionText.length > 100 ? q.questionText.substring(0, 100) + '...' : q.questionText;
 
                           return (
-                            <tr key={q.questionId} className="group">
-                              <td colSpan={4} className="p-0">
+                            <li key={q.questionId} className="group flex flex-col">
                                 {/* Row Summary */}
                                 <div
                                   onClick={() => setExpandedQuestionId(isExpanded ? null : q.questionId)}
-                                  className={`flex items-center cursor-pointer transition-colors p-4 ${isExpanded ? 'bg-blue-50/40' : 'hover:bg-gray-50/50'}`}
+                                  className={`flex flex-col md:flex-row md:items-center cursor-pointer transition-colors p-4 gap-2 md:gap-0 ${isExpanded ? 'bg-blue-50/40' : 'hover:bg-gray-50/50'}`}
                                 >
-                                  <div className="w-20 font-bold text-gray-900">{q.questionNo}</div>
-                                  <div className="flex-1 min-w-0 pr-4">
-                                    <p className="text-gray-800 truncate font-medium">{truncatedText}</p>
+                                  <div className="flex items-center gap-2 md:w-20 md:block md:shrink-0 font-bold text-gray-900">
+                                    <span className="md:hidden text-gray-500 font-normal">Q.No</span> {q.questionNo}
                                   </div>
-                                  <div className="w-40 text-gray-500 font-medium">{q.subject}</div>
-                                  <div className="w-40 flex items-center justify-center">
-                                    {q.status === 'correct' && (
+                                  <div className="flex-1 min-w-0 md:pr-4">
+                                    <p className="text-gray-800 font-medium md:truncate line-clamp-2 md:line-clamp-none">{truncatedText}</p>
+                                  </div>
+                                  <div className="flex items-center justify-between md:contents mt-2 md:mt-0">
+                                    <div className="md:w-40 md:shrink-0 text-gray-500 font-medium">{q.subject}</div>
+                                    <div className="md:w-40 md:shrink-0 flex items-center justify-end md:justify-center">
+                                      {q.status === 'correct' && (
                                       <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-50 text-green-700 border border-green-200">
                                         <span className="material-symbols-outlined text-[14px]">check_circle</span> Correct
                                       </span>
@@ -1092,12 +1093,13 @@ const Reports = () => {
                                         <span className="material-symbols-outlined text-[14px]">hourglass_empty</span> Unanswered
                                       </span>
                                     )}
+                                    </div>
                                   </div>
                                 </div>
 
                                 {/* Row Details (Visible on click) */}
                                 {isExpanded && (
-                                  <div className="border-t border-gray-100 px-8 py-6 bg-gray-50/40">
+                                  <div className="border-t border-gray-100 px-4 md:px-8 py-6 bg-gray-50/40">
                                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                                       {/* Left Side: Question, Diagrams, and Options */}
                                       <div className="col-span-8 space-y-4">
@@ -1216,149 +1218,138 @@ const Reports = () => {
                                     </div>
                                   </div>
                                 )}
-                              </td>
-                            </tr>
+                            </li>
                           );
                         })
                       )}
-                    </tbody>
-                  </table>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
           )}
 
           {/* Practice Modal Overlay */}
-          {practiceModalData && (
-            <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-              <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto flex flex-col relative custom-scrollbar">
+          <Sheet
+            open={!!practiceModalData}
+            onClose={() => {
+              setPracticeModalData(null);
+              setPracticeModalAnswers({});
+            }}
+            title={
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+                  <span className="material-symbols-outlined text-amber-500">psychology</span>
+                  Recommended Practice
+                </h3>
+                <p className="text-sm text-gray-500 font-medium mt-1">
+                  {practiceModalTitle || 'Practice these targeted questions to improve your weak areas.'}
+                </p>
+              </div>
+            }
+          >
+            {practiceLoading ? (
+              <div className="flex flex-col items-center justify-center gap-3 py-16">
+                <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+                <p className="text-sm text-gray-500 font-medium">Loading practice questions...</p>
+              </div>
+            ) : practiceModalData && practiceModalData.length === 0 ? (
+              <div className="py-16 text-center text-sm text-gray-400 font-medium px-6">
+                No practice questions available for this concept yet.
+              </div>
+            ) : practiceModalData ? (
+              <div className="p-6 space-y-6">
+                {practiceModalData.map((mq, idx) => {
+                  const isNumerical = mq.questionType === 'numerical' || !mq.options || mq.options.length === 0;
+                  const isRevealed = !!practiceModalAnswers[idx];
 
-                <div className="sticky top-0 bg-white/95 backdrop-blur z-10 border-b border-gray-100 p-5 flex items-center justify-between">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                      <span className="material-symbols-outlined text-amber-500">psychology</span>
-                      Recommended Practice
-                    </h3>
-                    <p className="text-sm text-gray-500 font-medium mt-1">
-                      {practiceModalTitle || 'Practice these targeted questions to improve your weak areas.'}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => {
-                      setPracticeModalData(null);
-                      setPracticeModalAnswers({});
-                    }}
-                    className="w-10 h-10 rounded-full bg-gray-50 hover:bg-gray-100 text-gray-500 flex items-center justify-center transition-colors shadow-sm border border-gray-200"
-                  >
-                    <span className="material-symbols-outlined">close</span>
-                  </button>
-                </div>
+                  return (
+                    <div key={mq.questionId || idx} className="bg-gray-50/50 rounded-xl border border-gray-200 p-6 shadow-sm">
+                      <h4 className="font-bold text-gray-900 mb-5 flex items-start gap-3">
+                        <span className="bg-blue-600 text-white w-7 h-7 rounded-lg flex items-center justify-center text-xs flex-shrink-0 mt-0.5 shadow-sm font-black">Q{idx + 1}</span>
+                        <div className="leading-relaxed"><MarkdownText text={mq.questionText} /></div>
+                      </h4>
 
-                {practiceLoading ? (
-                  <div className="flex flex-col items-center justify-center gap-3 py-16">
-                    <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
-                    <p className="text-sm text-gray-500 font-medium">Loading practice questions...</p>
-                  </div>
-                ) : practiceModalData.length === 0 ? (
-                  <div className="py-16 text-center text-sm text-gray-400 font-medium px-6">
-                    No practice questions available for this concept yet.
-                  </div>
-                ) : (
-                  <div className="p-6 space-y-6">
-                    {practiceModalData.map((mq, idx) => {
-                      const isNumerical = mq.questionType === 'numerical' || !mq.options || mq.options.length === 0;
-                      const isRevealed = !!practiceModalAnswers[idx];
+                      {mq.diagramSvg && (
+                        <div className="ml-10 mb-4 p-3 bg-white rounded-xl border border-gray-200 inline-block max-w-full overflow-hidden">
+                          <div className="w-full max-w-full md:max-w-[360px]" dangerouslySetInnerHTML={{ __html: mq.diagramSvg }} />
+                        </div>
+                      )}
 
-                      return (
-                        <div key={mq.questionId || idx} className="bg-gray-50/50 rounded-xl border border-gray-200 p-6 shadow-sm">
-                          <h4 className="font-bold text-gray-900 mb-5 flex items-start gap-3">
-                            <span className="bg-blue-600 text-white w-7 h-7 rounded-lg flex items-center justify-center text-xs flex-shrink-0 mt-0.5 shadow-sm font-black">Q{idx + 1}</span>
-                            <div className="leading-relaxed"><MarkdownText text={mq.questionText} /></div>
-                          </h4>
-
-                          {mq.diagramSvg && (
-                            <div className="ml-10 mb-4 p-3 bg-white rounded-xl border border-gray-200 inline-block max-w-full overflow-hidden">
-                              <div className="w-full max-w-full md:max-w-[360px]" dangerouslySetInnerHTML={{ __html: mq.diagramSvg }} />
-                            </div>
-                          )}
-
-                          {isNumerical ? (
-                            <div className="pl-10">
-                              {!isRevealed ? (
-                                <button
-                                  onClick={() => setPracticeModalAnswers(prev => ({ ...prev, [idx]: mq.correctOption }))}
-                                  className="px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-lg text-sm font-bold transition-colors"
-                                >
-                                  Reveal answer
-                                </button>
-                              ) : (
-                                <div className="p-3.5 rounded-xl border border-green-400 bg-green-50 text-green-900 font-bold text-sm inline-block">
-                                  Answer: {mq.correctOption}
-                                </div>
-                              )}
-                            </div>
+                      {isNumerical ? (
+                        <div className="pl-10">
+                          {!isRevealed ? (
+                            <button
+                              onClick={() => setPracticeModalAnswers(prev => ({ ...prev, [idx]: mq.correctOption }))}
+                              className="px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-lg text-sm font-bold transition-colors"
+                            >
+                              Reveal answer
+                            </button>
                           ) : (
-                            <div className="space-y-3 pl-10">
-                              {mq.options.map((opt: string, optIdx: number) => {
-                                const letter = String.fromCharCode(65 + optIdx);
-                                const isSelected = practiceModalAnswers[idx] === letter;
-                                const isAnswered = !!practiceModalAnswers[idx];
-                                const isCorrectOption = mq.correctOption === letter;
-
-                                let style = "bg-white border-gray-200 hover:border-blue-400 hover:bg-blue-50 text-gray-700 cursor-pointer shadow-sm";
-                                let icon = null;
-
-                                if (isAnswered) {
-                                  style = "bg-white border-gray-200 text-gray-400 opacity-60 cursor-default shadow-none";
-                                  if (isCorrectOption) {
-                                    style = "bg-green-50 border-green-400 text-green-900 font-bold opacity-100 shadow-sm ring-1 ring-green-400";
-                                    icon = <span className="material-symbols-outlined text-green-600 text-[18px]">check_circle</span>;
-                                  } else if (isSelected && !isCorrectOption) {
-                                    style = "bg-red-50 border-red-400 text-red-900 font-bold opacity-100 shadow-sm ring-1 ring-red-400";
-                                    icon = <span className="material-symbols-outlined text-red-500 text-[18px]">cancel</span>;
-                                  }
-                                }
-
-                                return (
-                                  <div
-                                    key={optIdx}
-                                    onClick={() => {
-                                      if (!isAnswered) {
-                                        setPracticeModalAnswers(prev => ({ ...prev, [idx]: letter }));
-                                      }
-                                    }}
-                                    className={`p-3.5 rounded-xl border transition-all flex items-center gap-3 ${style}`}
-                                  >
-                                    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border shadow-sm ${isAnswered && isCorrectOption ? 'bg-green-500 text-white border-green-600' : isAnswered && isSelected ? 'bg-red-500 text-white border-red-600' : 'bg-gray-100 text-gray-500 border-gray-300'}`}>
-                                      {letter}
-                                    </div>
-                                    <div className="flex-1 text-sm"><MarkdownText text={opt} /></div>
-                                    {icon}
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          )}
-
-                          {practiceModalAnswers[idx] && (
-                            <div className="mt-6 ml-10 bg-blue-50/70 rounded-xl p-5 border border-blue-100 shadow-sm">
-                              <h5 className="text-[11px] font-bold text-blue-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                                <span className="material-symbols-outlined text-[16px]">lightbulb</span> Step-by-Step Solution
-                              </h5>
-                              <div className="text-sm text-gray-800 leading-relaxed font-medium">
-                                <MarkdownText text={mq.solutionText} />
-                              </div>
+                            <div className="p-3.5 rounded-xl border border-green-400 bg-green-50 text-green-900 font-bold text-sm inline-block">
+                              Answer: {mq.correctOption}
                             </div>
                           )}
                         </div>
-                      );
-                    })}
-                  </div>
-                )}
+                      ) : (
+                        <div className="space-y-3 pl-10">
+                          {mq.options.map((opt: string, optIdx: number) => {
+                            const letter = String.fromCharCode(65 + optIdx);
+                            const isSelected = practiceModalAnswers[idx] === letter;
+                            const isAnswered = !!practiceModalAnswers[idx];
+                            const isCorrectOption = mq.correctOption === letter;
 
+                            let style = "bg-white border-gray-200 hover:border-blue-400 hover:bg-blue-50 text-gray-700 cursor-pointer shadow-sm";
+                            let icon = null;
+
+                            if (isAnswered) {
+                              style = "bg-white border-gray-200 text-gray-400 opacity-60 cursor-default shadow-none";
+                              if (isCorrectOption) {
+                                style = "bg-green-50 border-green-400 text-green-900 font-bold opacity-100 shadow-sm ring-1 ring-green-400";
+                                icon = <span className="material-symbols-outlined text-green-600 text-[18px]">check_circle</span>;
+                              } else if (isSelected && !isCorrectOption) {
+                                style = "bg-red-50 border-red-400 text-red-900 font-bold opacity-100 shadow-sm ring-1 ring-red-400";
+                                icon = <span className="material-symbols-outlined text-red-500 text-[18px]">cancel</span>;
+                              }
+                            }
+
+                            return (
+                              <div
+                                key={optIdx}
+                                onClick={() => {
+                                  if (!isAnswered) {
+                                    setPracticeModalAnswers(prev => ({ ...prev, [idx]: letter }));
+                                  }
+                                }}
+                                className={`p-3.5 rounded-xl border transition-all flex items-center gap-3 ${style}`}
+                              >
+                                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border shadow-sm ${isAnswered && isCorrectOption ? 'bg-green-500 text-white border-green-600' : isAnswered && isSelected ? 'bg-red-500 text-white border-red-600' : 'bg-gray-100 text-gray-500 border-gray-300'}`}>
+                                  {letter}
+                                </div>
+                                <div className="flex-1 text-sm"><MarkdownText text={opt} /></div>
+                                {icon}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+
+                      {practiceModalAnswers[idx] && (
+                        <div className="mt-6 ml-10 bg-blue-50/70 rounded-xl p-5 border border-blue-100 shadow-sm">
+                          <h5 className="text-[11px] font-bold text-blue-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                            <span className="material-symbols-outlined text-[16px]">lightbulb</span> Step-by-Step Solution
+                          </h5>
+                          <div className="text-sm text-gray-800 leading-relaxed font-medium">
+                            <MarkdownText text={mq.solutionText} />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
-            </div>
-          )}
+            ) : null}
+          </Sheet>
         </div>
       </div>
     );
@@ -1367,11 +1358,11 @@ const Reports = () => {
   // --- STUDENT VIEW: MAIN REPORTS LIST ---
   if (!isAdmin) {
     return (
-      <div className="flex flex-col min-w-0 w-full p-8 bg-gray-50/50 min-h-screen">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 tracking-tight">My Reports</h2>
-          <p className="text-gray-500 mt-1">Access all your diagnostic test attempts and structured analytics reports.</p>
-        </div>
+      <PageContainer>
+        <PageHeader 
+          title="My Reports"
+          subtitle="Access all your diagnostic test attempts and structured analytics reports."
+        />
 
         <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
           <div className="p-5 border-b border-gray-100 bg-white">
@@ -1384,22 +1375,22 @@ const Reports = () => {
               reports.map((report) => {
                 const scorePercentage = Math.round((report.score / report.totalMarks) * 100);
                 return (
-                  <div key={report._id} className="flex items-center justify-between p-6 hover:bg-gray-50 transition-colors">
-                    <div className="flex items-center gap-4">
-                      <div className="bg-blue-100 text-blue-600 p-3 rounded-xl flex items-center justify-center">
+                  <div key={report._id} className="flex flex-col md:flex-row md:items-center justify-between p-4 md:p-6 gap-4 md:gap-6 hover:bg-gray-50 transition-colors">
+                    <div className="flex items-start md:items-center gap-4">
+                      <div className="bg-blue-100 text-blue-600 p-3 rounded-xl flex items-center justify-center shrink-0">
                         <span className="material-symbols-outlined text-2xl">analytics</span>
                       </div>
-                      <div>
-                        <h4 className="font-bold text-gray-900 text-base">{report.testId?.title || 'Diagnostic Test'}</h4>
+                      <div className="min-w-0">
+                        <h4 className="font-bold text-gray-900 text-base break-words hyphens-auto">{report.testId?.title || 'Diagnostic Test'}</h4>
                         <p className="text-xs text-gray-500 mt-1">
                           Conducted On: {new Date(report.createdAt).toLocaleDateString()} &bull; Type: {report.testId?.examType || 'NEET'}
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-8">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 md:gap-8 border-t border-gray-100 pt-4 md:pt-0 md:border-none w-full md:w-auto">
                       {/* Score Badge */}
-                      <div className="text-right">
+                      <div className="text-left sm:text-right w-full sm:w-auto">
                         <p className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">Your Score</p>
                         <p className="font-extrabold text-blue-600 text-xl">
                           {report.score} <span className="text-xs text-gray-400 font-medium">/ {report.totalMarks} ({scorePercentage}%)</span>
@@ -1407,10 +1398,10 @@ const Reports = () => {
                       </div>
 
                       {/* Action buttons */}
-                      <div className="flex gap-2">
+                      <div className="flex flex-wrap gap-2 w-full sm:w-auto">
                         <button
                           onClick={() => fetchReviewDetails(report._id)}
-                          className="px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-100 rounded-lg text-sm font-bold transition-colors flex items-center gap-1"
+                          className="flex-1 sm:flex-none px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-100 rounded-lg text-sm font-bold transition-colors flex items-center justify-center gap-1"
                         >
                           <span className="material-symbols-outlined text-[16px]">visibility</span>
                           Review Answers
@@ -1419,7 +1410,7 @@ const Reports = () => {
                           onClick={() => {
                             window.open(window.location.origin + '/student/reports?printReportId=' + report._id + '&closeAfterPrint=true', '_blank');
                           }}
-                          className="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg text-sm font-bold hover:bg-gray-50 transition-colors flex items-center gap-1 shadow-sm"
+                          className="flex-1 sm:flex-none px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg text-sm font-bold hover:bg-gray-50 transition-colors flex items-center justify-center gap-1 shadow-sm"
                         >
                           <span className="material-symbols-outlined text-[16px]">picture_as_pdf</span>
                           PDF
@@ -1432,7 +1423,7 @@ const Reports = () => {
             )}
           </div>
         </div>
-      </div>
+      </PageContainer>
     );
   }
 
@@ -1469,7 +1460,7 @@ const Reports = () => {
 
 
     return (
-      <div className="flex flex-col min-w-0 w-full p-8 bg-gray-50 min-h-screen">
+      <PageContainer>
         {/* Back header */}
         <header className="flex justify-between items-center mb-8 bg-white p-6 rounded-xl border border-gray-200 shadow-sm relative overflow-hidden">
           <div className="absolute inset-0 border-2 border-transparent bg-gradient-to-r from-indigo-500 to-purple-500 opacity-10 pointer-events-none rounded-xl" style={{ "WebkitMask": "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)", "WebkitMaskComposite": "xor", "maskComposite": "exclude", "padding": "2px" }}></div>
@@ -1677,7 +1668,7 @@ const Reports = () => {
             </section>
           </div>
         </div>
-      </div>
+      </PageContainer>
     );
   }
 
@@ -1686,22 +1677,22 @@ const Reports = () => {
 
   return (
     <>
-      <div className="flex flex-col min-w-0 w-full p-8 print:hidden">
-        <div className="flex justify-between items-end mb-6">
-          <div>
-            <h2 className="text-3xl font-bold text-gray-800 tracking-tight">Publish Reports</h2>
-            <p className="text-gray-500 mt-1">Publish evaluated test results to the Student Portal so students can pull their PDFs on-demand.</p>
-          </div>
-          <div className="flex gap-3">
-            <input
-              type="text"
-              placeholder="Search reports..."
-              className="px-4 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-        </div>
+      <PageContainer className="print:hidden">
+        <PageHeader 
+          title="Publish Reports"
+          subtitle="Publish evaluated test results to the Student Portal so students can pull their PDFs on-demand."
+          actions={
+            <div className="flex gap-3">
+              <input
+                type="text"
+                placeholder="Search reports..."
+                className="px-4 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+          }
+        />
 
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
           <div className="p-6 border-b border-gray-200 flex justify-between items-center bg-gray-50">
@@ -1789,7 +1780,7 @@ const Reports = () => {
             </tbody>
           </table>
         </div>
-      </div>
+      </PageContainer>
 
       {/* ===== ADMIN SAMPLE PDF MODAL ===== */}
       {samplePdfData && (
@@ -2045,6 +2036,7 @@ const Reports = () => {
             </div>
           </div>
         </div>
+
       )}
     </>
   );

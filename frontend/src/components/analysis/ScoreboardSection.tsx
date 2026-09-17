@@ -51,21 +51,23 @@ const ScoreboardSection = ({ analysis }: Props) => {
         ))}
       </div>
 
-      <div className="flex flex-col md:flex-row items-center gap-8 pt-4 border-t border-gray-100">
-        <div className="flex items-center gap-2 text-sm font-bold text-gray-700 md:w-48">
+      <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 pt-4 border-t border-gray-100 w-full min-w-0">
+        <div className="flex items-center gap-2 text-sm font-bold text-gray-700 md:w-48 shrink-0 w-full md:w-auto justify-center md:justify-start">
           <span className="material-symbols-outlined text-[20px] text-gray-500">donut_small</span>
           Question Distribution
         </div>
-        <DonutChart
-          size={170}
-          strokeWidth={34}
-          segments={[
-            { value: summary.correct, color: STATUS_COLORS.correct, label: 'Correct' },
-            { value: summary.incorrect, color: STATUS_COLORS.incorrect, label: 'Incorrect' },
-            { value: summary.skipped, color: STATUS_COLORS.unanswered, label: 'Unattempted' },
-          ]}
-        />
-        <div className="text-xs text-gray-500 font-medium md:max-w-xs leading-relaxed">
+        <div className="shrink-0 max-w-full overflow-hidden">
+          <DonutChart
+            size={170}
+            strokeWidth={34}
+            segments={[
+              { value: summary.correct, color: STATUS_COLORS.correct, label: 'Correct' },
+              { value: summary.incorrect, color: STATUS_COLORS.incorrect, label: 'Incorrect' },
+              { value: summary.skipped, color: STATUS_COLORS.unanswered, label: 'Unattempted' },
+            ]}
+          />
+        </div>
+        <div className="text-xs text-gray-500 font-medium md:max-w-xs leading-relaxed w-full min-w-0 text-center md:text-left">
           <div><span className="font-bold text-green-700">+{summary.positiveMarks}</span> earned from correct answers</div>
           <div><span className="font-bold text-red-600">{summary.negativeMarks}</span> lost to negative marking</div>
           <div className="mt-1 text-gray-400">Net: <span className="font-bold text-gray-800">{summary.score}</span> / {summary.maxMarks}</div>

@@ -20,9 +20,9 @@ const SectionCard = ({ icon, iconColor, title, description, tips, action, childr
   <section id={id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 print:shadow-none print:border-gray-300 print:break-inside-avoid">
     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-5 print:break-inside-avoid">
       <div className="min-w-0">
-        <h3 className="text-lg font-black text-gray-900 tracking-tight flex items-center gap-2">
-          <span className={`material-symbols-outlined text-[22px] leading-none ${iconColor || 'text-gray-700'}`}>{icon}</span>
-          {title}
+        <h3 className="text-lg font-black text-gray-900 tracking-tight flex items-center gap-2 min-w-0">
+          <span className={`material-symbols-outlined text-[22px] leading-none ${iconColor || 'text-gray-700'} shrink-0`}>{icon}</span>
+          <span className="min-w-0 break-words hyphens-auto">{title}</span>
         </h3>
         {description && <p className="text-sm text-gray-500 font-medium mt-1 leading-relaxed">{description}</p>}
         {tips && tips.length > 0 && (

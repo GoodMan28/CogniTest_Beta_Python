@@ -22,7 +22,7 @@ const StudentLayout = () => {
 
       <StudentSidebar isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
       
-      <div className="flex-1 mt-16 md:mt-0 md:ml-64 print:ml-0 print:w-full print:mt-0">
+      <div className="flex-1 min-w-0 mt-16 md:mt-0 md:ml-64 print:ml-0 print:w-full print:mt-0">
         <Outlet />
       </div>
     </div>

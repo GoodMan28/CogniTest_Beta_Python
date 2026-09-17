@@ -1,6 +1,7 @@
 import type { ReportAnalysis } from '../../types/reportAnalysis';
 import { subjectColor } from '../../types/reportAnalysis';
 import SectionCard, { fmtPct, pctTone, tdClass, thClass } from './SectionCard';
+import ResponsiveTable from '../ui/ResponsiveTable';
 
 interface Props {
   analysis: ReportAnalysis;
@@ -25,14 +26,15 @@ const HitRateSection = ({ analysis }: Props) => (
       "High hit rate but low hustle? You're playing too safe — time to push limits!",
     ]}
   >
-    <div className="overflow-x-auto rounded-lg border border-gray-100">
-      <table className="w-full">
-        <thead className="bg-gray-50 border-b border-gray-100">
+    <div className="overflow-x-auto rounded-lg border border-gray-100 min-w-0 w-full">
+      <ResponsiveTable>
+<table className="min-w-full">
+        <thead className="bg-gray-50 border-b border-gray-100 max-sm:px-4">
           <tr>
-            <th className={`${thClass} text-left`}>Subject</th>
-            <th className={`${thClass} text-center`}>Accuracy %</th>
-            <th className={`${thClass} text-center`}>Attempt %</th>
-            <th className={`${thClass} text-left`}>Verdict</th>
+            <th className={`${thClass} text-left max-sm:px-4`}>Subject</th>
+            <th className={`${thClass} text-center max-sm:px-4`}>Accuracy %</th>
+            <th className={`${thClass} text-center max-sm:px-4`}>Attempt %</th>
+            <th className={`${thClass} text-left max-sm:px-4`}>Verdict</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-100">
@@ -40,25 +42,26 @@ const HitRateSection = ({ analysis }: Props) => (
             const v = verdictFor(s.accuracyPct, s.attemptPct);
             return (
               <tr key={s.key}>
-                <td className={`${tdClass} font-bold`} style={{ color: subjectColor(s.label, i) }}>{s.label}</td>
-                <td className={`${tdClass} text-center font-black ${pctTone(s.accuracyPct)}`}>
+                <td className={`${tdClass} font-bold max-sm:px-4`} style={{ color: subjectColor(s.label, i) }}>{s.label}</td>
+                <td className={`${tdClass} text-center font-black ${pctTone(s.accuracyPct)} max-sm:px-4`}>
                   {fmtPct(s.accuracyPct)}
                   <div className="h-1.5 w-24 mx-auto mt-1 bg-gray-100 rounded-full overflow-hidden">
                     <div className="h-full bg-current rounded-full" style={{ width: `${s.accuracyPct ?? 0}%` }} />
                   </div>
                 </td>
-                <td className={`${tdClass} text-center font-black ${pctTone(s.attemptPct)}`}>
+                <td className={`${tdClass} text-center font-black ${pctTone(s.attemptPct)} max-sm:px-4`}>
                   {fmtPct(s.attemptPct)}
                   <div className="h-1.5 w-24 mx-auto mt-1 bg-gray-100 rounded-full overflow-hidden">
                     <div className="h-full bg-current rounded-full" style={{ width: `${s.attemptPct ?? 0}%` }} />
                   </div>
                 </td>
-                <td className={`${tdClass} text-xs font-bold ${v.tone}`}>{v.text}</td>
+                <td className={`${tdClass} text-xs font-bold ${v.tone} max-sm:px-4`}>{v.text}</td>
               </tr>
             );
           })}
         </tbody>
       </table>
+</ResponsiveTable>
     </div>
   </SectionCard>
 );

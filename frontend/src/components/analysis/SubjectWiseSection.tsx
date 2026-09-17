@@ -2,6 +2,7 @@ import type { ReportAnalysis } from '../../types/reportAnalysis';
 import { STATUS_COLORS, subjectColor } from '../../types/reportAnalysis';
 import DonutChart from '../charts/DonutChart';
 import SectionCard, { marksTone, tdClass, thClass } from './SectionCard';
+import ResponsiveTable from '../ui/ResponsiveTable';
 
 interface Props {
   analysis: ReportAnalysis;
@@ -22,33 +23,35 @@ const SubjectWiseSection = ({ analysis }: Props) => {
       description="See how your total marks are spread across each subject — including your positive and negative scores."
     >
       {/* Marks distribution + overall pie */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 print:break-inside-avoid">
-        <div className="lg:col-span-2">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 print:break-inside-avoid min-w-0 w-full">
+        <div className="lg:col-span-2 min-w-0 w-full">
           <h4 className="text-sm font-bold text-gray-800 mb-3">Marks Distribution &amp; Overall Balance</h4>
           <div className="overflow-x-auto rounded-lg border border-gray-100">
-            <table className="w-full">
-              <thead className="bg-gray-50 border-b border-gray-100">
+            <ResponsiveTable>
+<table className="min-w-full">
+              <thead className="bg-gray-50 border-b border-gray-100 max-sm:px-4">
                 <tr>
-                  <th className={`${thClass} text-left`}>Subject</th>
-                  <th className={`${thClass} text-center`}>Total Marks</th>
-                  <th className={`${thClass} text-center`}>Pos(+)</th>
-                  <th className={`${thClass} text-center`}>Neg(-)</th>
+                  <th className={`${thClass} text-left max-sm:px-4`}>Subject</th>
+                  <th className={`${thClass} text-center max-sm:px-4`}>Total Marks</th>
+                  <th className={`${thClass} text-center max-sm:px-4`}>Pos(+)</th>
+                  <th className={`${thClass} text-center max-sm:px-4`}>Neg(-)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {subjects.map((s, i) => (
                   <tr key={s.key}>
-                    <td className={`${tdClass} font-bold`} style={{ color: subjectColor(s.label, i) }}>{s.label}</td>
-                    <td className={`${tdClass} text-center`}>
+                    <td className={`${tdClass} font-bold max-sm:px-4`} style={{ color: subjectColor(s.label, i) }}>{s.label}</td>
+                    <td className={`${tdClass} text-center max-sm:px-4`}>
                       <span className={`font-black ${marksTone(s.score)}`}>{s.score}</span>
                       <span className="text-gray-400 text-xs">/{s.maxMarks}</span>
                     </td>
-                    <td className={`${tdClass} text-center font-bold text-green-700`}>{s.positiveMarks}</td>
-                    <td className={`${tdClass} text-center font-bold ${s.negativeMarks < 0 ? 'text-red-600' : 'text-gray-400'}`}>{s.negativeMarks}</td>
+                    <td className={`${tdClass} text-center font-bold text-green-700 max-sm:px-4`}>{s.positiveMarks}</td>
+                    <td className={`${tdClass} text-center font-bold ${s.negativeMarks < 0 ? 'text-red-600' : 'text-gray-400'} max-sm:px-4`}>{s.negativeMarks}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
+</ResponsiveTable>
           </div>
         </div>
 
@@ -71,26 +74,28 @@ const SubjectWiseSection = ({ analysis }: Props) => {
         <h4 className="text-sm font-bold text-gray-800">Correct vs. Incorrect vs. Unattempted</h4>
         <p className="text-xs text-gray-500 font-medium mb-3">The table and pie charts show your correct, incorrect, and unattempted question count clearly.</p>
         <div className="overflow-x-auto rounded-lg border border-gray-100 mb-6">
-          <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-100">
+          <ResponsiveTable>
+<table className="min-w-full">
+            <thead className="bg-gray-50 border-b border-gray-100 max-sm:px-4">
               <tr>
-                <th className={`${thClass} text-left`}>Subject</th>
-                <th className={`${thClass} text-center`}>Correct</th>
-                <th className={`${thClass} text-center`}>Incorrect</th>
-                <th className={`${thClass} text-center`}>Unattempted</th>
+                <th className={`${thClass} text-left max-sm:px-4`}>Subject</th>
+                <th className={`${thClass} text-center max-sm:px-4`}>Correct</th>
+                <th className={`${thClass} text-center max-sm:px-4`}>Incorrect</th>
+                <th className={`${thClass} text-center max-sm:px-4`}>Unattempted</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {subjects.map((s, i) => (
                 <tr key={s.key}>
-                  <td className={`${tdClass} font-bold`} style={{ color: subjectColor(s.label, i) }}>{s.label}</td>
-                  <td className={`${tdClass} text-center`}><span className="font-black text-green-700">{s.correct}</span><span className="text-gray-400 text-xs">/{s.questionCount}</span></td>
-                  <td className={`${tdClass} text-center`}><span className="font-black text-red-600">{s.incorrect}</span><span className="text-gray-400 text-xs">/{s.questionCount}</span></td>
-                  <td className={`${tdClass} text-center`}><span className="font-black text-gray-600">{s.skipped}</span><span className="text-gray-400 text-xs">/{s.questionCount}</span></td>
+                  <td className={`${tdClass} font-bold max-sm:px-4`} style={{ color: subjectColor(s.label, i) }}>{s.label}</td>
+                  <td className={`${tdClass} text-center max-sm:px-4`}><span className="font-black text-green-700">{s.correct}</span><span className="text-gray-400 text-xs">/{s.questionCount}</span></td>
+                  <td className={`${tdClass} text-center max-sm:px-4`}><span className="font-black text-red-600">{s.incorrect}</span><span className="text-gray-400 text-xs">/{s.questionCount}</span></td>
+                  <td className={`${tdClass} text-center max-sm:px-4`}><span className="font-black text-gray-600">{s.skipped}</span><span className="text-gray-400 text-xs">/{s.questionCount}</span></td>
                 </tr>
               ))}
             </tbody>
           </table>
+</ResponsiveTable>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

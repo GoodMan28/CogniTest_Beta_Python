@@ -1,6 +1,7 @@
 import type { ReportAnalysis } from '../../types/reportAnalysis';
 import { subjectColor } from '../../types/reportAnalysis';
 import SectionCard, { tdClass, thClass } from './SectionCard';
+import ResponsiveTable from '../ui/ResponsiveTable';
 
 interface Props {
   analysis: ReportAnalysis;
@@ -38,15 +39,16 @@ const BatchComparisonSection = ({ analysis }: Props) => {
       title="You vs. the Batch"
       description={`How your marks stack up against the class average and the ${cohort.topperCount > 1 ? 'joint toppers' : 'topper'} across ${cohort.size} evaluated students.`}
     >
-      <div className="overflow-x-auto rounded-lg border border-gray-100">
-        <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-100">
+      <div className="overflow-x-auto rounded-lg border border-gray-100 min-w-0 w-full">
+        <ResponsiveTable>
+<table className="min-w-full">
+          <thead className="bg-gray-50 border-b border-gray-100 max-sm:px-4">
             <tr>
-              <th className={`${thClass} text-left`}>Scope</th>
-              <th className={`${thClass} text-center`}>You</th>
-              <th className={`${thClass} text-center`}>Class Avg</th>
-              <th className={`${thClass} text-center`}>{topperLabel}</th>
-              <th className={`${thClass} text-left w-64`}>Gap to topper</th>
+              <th className={`${thClass} text-left max-sm:px-4`}>Scope</th>
+              <th className={`${thClass} text-center max-sm:px-4`}>You</th>
+              <th className={`${thClass} text-center max-sm:px-4`}>Class Avg</th>
+              <th className={`${thClass} text-center max-sm:px-4`}>{topperLabel}</th>
+              <th className={`${thClass} text-left w-64 max-sm:px-4`}>Gap to topper</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -54,11 +56,11 @@ const BatchComparisonSection = ({ analysis }: Props) => {
               const aboveAvg = r.you >= r.avg;
               return (
                 <tr key={r.label}>
-                  <td className={`${tdClass} font-bold`} style={{ color: r.color }}>{r.label}</td>
-                  <td className={`${tdClass} text-center font-black ${aboveAvg ? 'text-green-700' : 'text-red-600'}`}>{r.you}<span className="text-gray-400 text-xs font-medium">/{r.max}</span></td>
-                  <td className={`${tdClass} text-center font-bold text-gray-700`}>{r.avg}</td>
-                  <td className={`${tdClass} text-center font-bold text-gray-700`}>{r.top}</td>
-                  <td className={`${tdClass}`}>
+                  <td className={`${tdClass} font-bold max-sm:px-4`} style={{ color: r.color }}>{r.label}</td>
+                  <td className={`${tdClass} text-center font-black ${aboveAvg ? 'text-green-700' : 'text-red-600'} max-sm:px-4`}>{r.you}<span className="text-gray-400 text-xs font-medium">/{r.max}</span></td>
+                  <td className={`${tdClass} text-center font-bold text-gray-700 max-sm:px-4`}>{r.avg}</td>
+                  <td className={`${tdClass} text-center font-bold text-gray-700 max-sm:px-4`}>{r.top}</td>
+                  <td className={`${tdClass} max-sm:px-4`}>
                     <div className="space-y-1">
                       <Bar value={r.you} max={r.max} color={r.color} />
                       <Bar value={r.top} max={r.max} color={r.color} faded />
@@ -74,6 +76,7 @@ const BatchComparisonSection = ({ analysis }: Props) => {
             })}
           </tbody>
         </table>
+</ResponsiveTable>
       </div>
     </SectionCard>
   );

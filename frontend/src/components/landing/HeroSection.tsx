@@ -39,9 +39,13 @@ const HeroSection = () => {
           50% { transform: perspective(1200px) rotateX(8deg) rotateY(-4deg) translate3d(0, -12px, 0); }
         }
         .dashboard-float {
-          animation: float 6s ease-in-out infinite;
-          transform: perspective(1200px) rotateX(8deg) rotateY(-4deg) translate3d(0, 0, 0);
           will-change: transform;
+        }
+        @media (min-width: 640px) {
+          .dashboard-float {
+            animation: float 6s ease-in-out infinite;
+            transform: perspective(1200px) rotateX(8deg) rotateY(-4deg) translate3d(0, 0, 0);
+          }
         }
         .glow-teal {
           box-shadow: 0 0 30px rgba(20, 184, 166, 0.3), 0 0 60px rgba(20, 184, 166, 0.1);
@@ -66,19 +70,19 @@ const HeroSection = () => {
         }
       `}</style>
 
-      <section ref={heroRef} className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20 pb-16 text-center">
+      <section ref={heroRef} className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 pt-28 sm:pt-20 pb-12 sm:pb-16 text-center">
         {/* Navbar */}
-        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4" style={{ background: 'rgba(2,8,23,0.95)', borderBottom: '1px solid rgba(20,184,166,0.15)' }}>
+        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 py-3 sm:py-4" style={{ background: 'rgba(2,8,23,0.95)', borderBottom: '1px solid rgba(20,184,166,0.15)' }}>
           <Link to="/" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-teal-500 to-cyan-500 shadow-[0_0_15px_rgba(20,184,166,0.5)]">
               <span className="text-white font-bold text-xl leading-none font-serif tracking-tighter italic">C</span>
             </div>
-            <span className="text-white font-bold text-xl tracking-tight">CogniTest</span>
+            <span className="text-white font-bold text-lg sm:text-xl tracking-tight">CogniTest</span>
           </Link>
-          <div className="flex items-center gap-3">
-            <Link to="/contact" className="text-sm text-gray-300 hover:text-white transition-colors px-3 py-2">Contact Us</Link>
-            <Link to="/student/login" className="text-sm text-gray-300 hover:text-white transition-colors px-3 py-2">Student Login</Link>
-            <Link to="/admin/login" className="btn-primary text-white text-sm font-semibold px-5 py-2 rounded-lg">Admin Dashboard</Link>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Link to="/contact" className="hidden sm:block text-sm text-gray-300 hover:text-white transition-colors px-3 py-2">Contact Us</Link>
+            <Link to="/student/login" className="hidden sm:block text-sm text-gray-300 hover:text-white transition-colors px-3 py-2">Student Login</Link>
+            <Link to="/admin/login" className="btn-primary text-white text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2 rounded-lg">Admin Login</Link>
           </div>
         </nav>
 
@@ -99,20 +103,19 @@ const HeroSection = () => {
         </h1>
 
         {/* Subheading */}
-        <p className="hero-animate hero-animate-delay-3 max-w-2xl text-gray-400 mb-10 leading-relaxed"
-          style={{ fontSize: '1.125rem', fontWeight: 400 }}>
+        <p className="hero-animate hero-animate-delay-3 max-w-2xl text-gray-400 mb-8 sm:mb-10 leading-relaxed text-sm sm:text-base md:text-lg">
           CogniTest powers JEE/NEET coaching institutes with AI-driven OMR processing, personalized analytics, and automated report generation — turning raw test scores into student success.
         </p>
 
         {/* CTA Buttons */}
-        <div className="hero-animate hero-animate-delay-4 flex flex-col sm:flex-row gap-4 mb-20">
-          <Link to="/student/login" className="btn-primary text-white font-bold px-8 py-4 rounded-xl text-base flex items-center gap-2 justify-center">
+        <div className="hero-animate hero-animate-delay-4 flex flex-col sm:flex-row gap-3 sm:gap-4 mb-16 sm:mb-20 w-full sm:w-auto px-4 sm:px-0">
+          <Link to="/student/login" className="btn-primary text-white font-bold px-8 py-3.5 sm:py-4 rounded-xl text-sm sm:text-base flex items-center gap-2 justify-center w-full sm:w-auto">
             Student Portal
-            <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+            <span className="material-symbols-outlined text-[18px] sm:text-[20px]">arrow_forward</span>
           </Link>
-          <Link to="/admin/login" className="btn-secondary text-white font-bold px-8 py-4 rounded-xl text-base flex items-center gap-2 justify-center bg-transparent">
+          <Link to="/admin/login" className="btn-secondary text-white font-bold px-8 py-3.5 sm:py-4 rounded-xl text-sm sm:text-base flex items-center gap-2 justify-center bg-transparent w-full sm:w-auto">
             Admin Dashboard
-            <span className="material-symbols-outlined text-[20px]">admin_panel_settings</span>
+            <span className="material-symbols-outlined text-[18px] sm:text-[20px]">admin_panel_settings</span>
           </Link>
         </div>
 
@@ -130,9 +133,9 @@ const HeroSection = () => {
           </div>
 
           {/* Dashboard content mock */}
-          <div className="p-6 grid grid-cols-12 gap-4">
+          <div className="p-3 sm:p-6 grid grid-cols-12 gap-3 sm:gap-4">
             {/* Score cards */}
-            <div className="col-span-12 grid grid-cols-4 gap-3">
+            <div className="col-span-12 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
               {[
                 { label: 'Total Score', value: '247/300', color: '#14b8a6' },
                 { label: 'Physics', value: '82/100', color: '#60a5fa' },
@@ -150,9 +153,9 @@ const HeroSection = () => {
             </div>
 
             {/* Chart placeholder */}
-            <div className="col-span-8 rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', height: '160px' }}>
-              <div className="text-xs text-gray-500 mb-3">Chapter-wise Performance</div>
-              <div className="flex items-end gap-2 h-24">
+            <div className="col-span-12 sm:col-span-8 rounded-xl p-3 sm:p-4 flex flex-col justify-between h-[140px] sm:h-[160px]" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+              <div className="text-xs text-gray-500 mb-2">Chapter-wise Performance</div>
+              <div className="flex items-end gap-1 sm:gap-2 h-20 sm:h-24">
                 {[60, 85, 45, 90, 70, 55, 80, 65, 75, 88].map((h, i) => (
                   <div key={i} className="flex-1 rounded-t-sm transition-all" style={{ height: `${h}%`, background: `rgba(20,184,166,${0.3 + (h / 300)})` }}></div>
                 ))}
@@ -160,7 +163,7 @@ const HeroSection = () => {
             </div>
 
             {/* Right panel */}
-            <div className="col-span-4 rounded-xl p-4 flex flex-col gap-3" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div className="col-span-12 sm:col-span-4 rounded-xl p-3 sm:p-4 flex flex-col gap-2 sm:gap-3" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
               <div className="text-xs text-gray-500">AI Recommendations</div>
               {['Complex Numbers', 'Electrochemistry', 'Optics'].map((topic) => (
                 <div key={topic} className="flex items-center gap-2 text-xs text-gray-400 py-1 px-2 rounded-lg" style={{ background: 'rgba(20,184,166,0.08)', border: '1px solid rgba(20,184,166,0.15)' }}>
