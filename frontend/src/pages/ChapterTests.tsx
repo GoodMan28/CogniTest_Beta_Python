@@ -403,8 +403,8 @@ const ChapterTests = () => {
                 <div className="flex gap-3 items-start">
                   <span className={`w-7 h-7 rounded-full ${theme.bg} ${theme.text} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5`}>2</span>
                   <div>
-                    <p className="text-sm font-semibold text-gray-700">Randomized Selection</p>
-                    <p className="text-xs text-gray-500">The system randomly selects questions that match your exact filters.</p>
+                    <p className="text-sm font-semibold text-gray-700">Targeted Questions</p>
+                    <p className="text-xs text-gray-500">The system curates high-quality questions specifically aligned with your chosen syllabus.</p>
                   </div>
                 </div>
                 <div className="flex gap-3 items-start">
