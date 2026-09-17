@@ -1,5 +1,6 @@
 import type { ReportDetailDTO } from '../../types/demoAnalysis';
 import DonutChart from '../charts/DonutChart';
+import ResponsiveTable from '../ui/ResponsiveTable';
 
 interface SubjectPerformanceProps {
   report: ReportDetailDTO;
@@ -57,7 +58,8 @@ const SubjectPerformance = ({ report }: SubjectPerformanceProps) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <div className="lg:col-span-2 overflow-x-auto">
           <h4 className="text-sm font-semibold text-gray-700 mb-3">Marks Distribution & Overall Balance</h4>
-          <table className="min-w-full divide-y divide-gray-200">
+          <ResponsiveTable>
+<table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
@@ -87,6 +89,7 @@ const SubjectPerformance = ({ report }: SubjectPerformanceProps) => {
               })}
             </tbody>
           </table>
+</ResponsiveTable>
         </div>
 
         <div className="flex flex-col items-center justify-center">
@@ -107,7 +110,8 @@ const SubjectPerformance = ({ report }: SubjectPerformanceProps) => {
       <div className="mb-6">
         <h4 className="text-sm font-semibold text-gray-700 mb-3">Correct vs. Incorrect vs. Unattempted</h4>
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
+          <ResponsiveTable>
+<table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
@@ -133,6 +137,7 @@ const SubjectPerformance = ({ report }: SubjectPerformanceProps) => {
               ))}
             </tbody>
           </table>
+</ResponsiveTable>
         </div>
       </div>
 

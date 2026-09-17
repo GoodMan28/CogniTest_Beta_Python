@@ -1,6 +1,7 @@
 import type { ReportAnalysis } from '../../types/reportAnalysis';
 import { subjectColor } from '../../types/reportAnalysis';
 import SectionCard, { marksTone, tdClass, thClass } from './SectionCard';
+import ResponsiveTable from '../ui/ResponsiveTable';
 
 interface Props {
   analysis: ReportAnalysis;
@@ -70,15 +71,16 @@ const QuestionBreakdownSection = ({ analysis, onOpenQuestion }: Props) => {
               {rows.length} questions · {correct} correct · {incorrect} incorrect · {skipped} skipped
             </p>
             <div className="overflow-x-auto rounded-lg border border-gray-100">
-              <table className="w-full">
-                <thead className="bg-gray-50 border-b border-gray-100">
+              <ResponsiveTable>
+<table className="min-w-full">
+                <thead className="bg-gray-50 border-b border-gray-100 max-sm:px-4">
                   <tr>
-                    <th className={`${thClass} text-left w-16`}>Q.No.</th>
-                    <th className={`${thClass} text-left w-28`}>Status</th>
-                    <th className={`${thClass} text-left`}>Chapter</th>
-                    <th className={`${thClass} text-left w-24`}>Difficulty</th>
-                    <th className={`${thClass} text-center w-40`}>% Student Correct</th>
-                    <th className={`${thClass} text-center w-20`}>Marks</th>
+                    <th className={`${thClass} text-left w-16 max-sm:px-4`}>Q.No.</th>
+                    <th className={`${thClass} text-left w-28 max-sm:px-4`}>Status</th>
+                    <th className={`${thClass} text-left max-sm:px-4`}>Chapter</th>
+                    <th className={`${thClass} text-left w-24 max-sm:px-4`}>Difficulty</th>
+                    <th className={`${thClass} text-center w-40 max-sm:px-4`}>% Student Correct</th>
+                    <th className={`${thClass} text-center w-20 max-sm:px-4`}>Marks</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
@@ -93,17 +95,17 @@ const QuestionBreakdownSection = ({ analysis, onOpenQuestion }: Props) => {
                         title={clickable ? `Open in ${q.subject} tab` : undefined}
                         className={`${missedButMostGotIt ? 'bg-amber-50/60' : ''} ${clickable ? 'cursor-pointer hover:bg-gray-50' : ''}`}
                       >
-                        <td className={`${tdClass} font-bold text-gray-900`}>{q.questionNo}</td>
-                        <td className={tdClass}><StatusPill status={q.status} /></td>
-                        <td className={`${tdClass} text-gray-600`}>{q.chapter.join(', ')}</td>
-                        <td className={tdClass}>
+                        <td className={`${tdClass} font-bold text-gray-900 max-sm:px-4`}>{q.questionNo}</td>
+                        <td className={`${tdClass} max-sm:px-4`}><StatusPill status={q.status} /></td>
+                        <td className={`${tdClass} text-gray-600 max-sm:px-4`}>{q.chapter.join(', ')}</td>
+                        <td className={`${tdClass} max-sm:px-4`}>
                           {q.difficulty === 'Unrated' ? (
                             <span className="text-gray-300">—</span>
                           ) : (
                             <span className="text-xs font-bold uppercase px-2 py-0.5 rounded bg-gray-100 text-gray-600 border border-gray-200">{q.difficulty}</span>
                           )}
                         </td>
-                        <td className={`${tdClass} text-center`}>
+                        <td className={`${tdClass} text-center max-sm:px-4`}>
                           <div className="flex items-center justify-center gap-2">
                             <span className={`font-bold ${missedButMostGotIt ? 'text-amber-700' : gotItButRare ? 'text-green-700' : 'text-gray-600'}`}>
                               {q.pctStudentsCorrect}%{gotItButRare ? <> <span className="material-symbols-outlined text-[12px] text-green-700">star</span></> : ''}
@@ -113,7 +115,7 @@ const QuestionBreakdownSection = ({ analysis, onOpenQuestion }: Props) => {
                             </span>
                           </div>
                         </td>
-                        <td className={`${tdClass} text-center font-bold ${marksTone(q.awardedMarks)}`}>
+                        <td className={`${tdClass} text-center font-bold ${marksTone(q.awardedMarks)} max-sm:px-4`}>
                           {q.awardedMarks > 0 ? `+${q.awardedMarks}` : q.awardedMarks}
                         </td>
                       </tr>
@@ -121,6 +123,7 @@ const QuestionBreakdownSection = ({ analysis, onOpenQuestion }: Props) => {
                   })}
                 </tbody>
               </table>
+</ResponsiveTable>
             </div>
           </div>
         );

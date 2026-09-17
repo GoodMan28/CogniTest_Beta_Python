@@ -2,6 +2,9 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import adminApi from '../api/adminApi';
+import ResponsiveTable from '../components/ui/ResponsiveTable';
+import { PageContainer } from '../components/ui/PageContainer';
+import { PageHeader } from '../components/ui/PageHeader';
 
 const mockPerformanceData = [
   { name: 'Week 1', score: 65 },
@@ -37,13 +40,11 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-w-0 w-full p-8">
-      <div className="flex justify-between items-end mb-6">
-        <div>
-          <h2 className="text-3xl font-bold text-gray-800 tracking-tight">Overview</h2>
-          <p className="text-gray-500 mt-1">Welcome back. Here's what's happening today.</p>
-        </div>
-      </div>
+    <PageContainer>
+      <PageHeader 
+        title="Overview"
+        subtitle="Welcome back. Here's what's happening today."
+      />
 
       {/* Metrics Row */}
       <div className="grid grid-cols-1 md:grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -162,7 +163,8 @@ const Dashboard = () => {
           </button>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm text-left">
+          <ResponsiveTable>
+<table className="min-w-full text-sm text-left">
             <thead className="text-xs text-gray-500 uppercase bg-gray-50/50 border-b border-gray-200">
               <tr>
                 <th className="px-6 py-4 font-medium">Test Name</th>
@@ -203,9 +205,10 @@ const Dashboard = () => {
               ))}
             </tbody>
           </table>
+</ResponsiveTable>
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

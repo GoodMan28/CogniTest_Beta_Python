@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { PageContainer } from '../components/ui/PageContainer';
+import { PageHeader } from '../components/ui/PageHeader';
 import { useAuth } from '../context/AuthContext';
 
 const StudentSettings = () => {
@@ -112,20 +114,14 @@ const StudentSettings = () => {
   }
 
   return (
-    <div className="flex flex-col min-w-0 w-full p-8">
-      <div className="flex justify-between items-end mb-6">
-        <div>
-          <h2 className="text-3xl font-bold text-gray-800 tracking-tight">Account Settings</h2>
-          <p className="text-gray-500 mt-1">Manage your profile, notifications, and security preferences.</p>
-        </div>
-        <button 
+    <PageContainer>
+      <PageHeader title="Account Settings" subtitle="Manage your profile, notifications, and security preferences." actions={<button 
           onClick={activeTab === 'profile' ? handleSaveChanges : undefined}
           disabled={saving}
           className="px-6 py-2 bg-blue-600 text-white rounded font-medium hover:bg-blue-700 transition-colors disabled:bg-blue-400"
         >
           {saving ? 'Saving...' : 'Save Changes'}
-        </button>
-      </div>
+        </button>} />
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row overflow-hidden min-h-[500px]">
         
@@ -300,7 +296,7 @@ const StudentSettings = () => {
 
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

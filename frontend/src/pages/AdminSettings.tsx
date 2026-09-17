@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import adminApi from '../api/adminApi';
+import { PageContainer } from '../components/ui/PageContainer';
+import { PageHeader } from '../components/ui/PageHeader';
 import { useAdminAuth } from '../context/AdminAuthContext';
 
 const AdminSettings = () => {
@@ -194,19 +196,13 @@ const AdminSettings = () => {
   };
 
   return (
-    <div className="flex flex-col min-w-0 w-full p-8">
-      <div className="flex justify-between items-end mb-6">
-        <div>
-          <h2 className="text-3xl font-bold text-gray-800 tracking-tight">Institute Settings</h2>
-          <p className="text-gray-500 mt-1">Configure your coaching portal, branding, batches, and subscription.</p>
-        </div>
-        <button 
+    <PageContainer>
+      <PageHeader title="Institute Settings" subtitle="Configure your coaching portal, branding, batches, and subscription." actions={<button 
           onClick={handleGlobalSave}
           className="px-6 py-2 bg-blue-600 text-white rounded font-medium hover:bg-blue-700 transition-colors shadow-sm"
         >
           Save Changes
-        </button>
-      </div>
+        </button>} />
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row overflow-hidden min-h-[600px]">
         
@@ -637,7 +633,7 @@ const AdminSettings = () => {
 
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

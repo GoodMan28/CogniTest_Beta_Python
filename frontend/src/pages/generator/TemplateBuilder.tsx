@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 import type { PaperTemplate, TemplateSection } from '../PaperGenerator';
+import ResponsiveTable from '../../components/ui/ResponsiveTable';
 
 interface Props {
   onComplete: (template: PaperTemplate) => void;
@@ -89,7 +90,8 @@ export default function TemplateBuilder({ onComplete, onSaveOnly }: Props) {
             </div>
 
             <div className="overflow-x-auto border border-gray-200 rounded-lg">
-              <table className="w-full text-sm text-left">
+              <ResponsiveTable>
+<table className="min-w-full text-sm text-left">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                   <tr>
                     <th className="px-4 py-3">S.No.</th>
@@ -157,6 +159,7 @@ export default function TemplateBuilder({ onComplete, onSaveOnly }: Props) {
                   ))}
                 </tbody>
               </table>
+</ResponsiveTable>
               {sections.length === 0 && (
                 <div className="p-4 text-center text-sm text-gray-500">No sections added yet.</div>
               )}

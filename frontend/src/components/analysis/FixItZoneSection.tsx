@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { ReportAnalysis } from '../../types/reportAnalysis';
 import { FIX_IT_REASONS, subjectColor } from '../../types/reportAnalysis';
 import SectionCard, { tdClass, thClass } from './SectionCard';
+import ResponsiveTable from '../ui/ResponsiveTable';
 
 interface Props {
   analysis: ReportAnalysis;
@@ -104,20 +105,21 @@ const FixItZoneSection = ({ analysis, onSaveReason, onFixIt, onOpenQuestion, onP
             <h4 className="text-base font-black text-gray-800">{subject}</h4>
           </div>
           <div className="overflow-x-auto rounded-lg border border-gray-100">
-            <table className="w-full">
-              <thead className="bg-gray-50 border-b border-gray-100">
+            <ResponsiveTable>
+<table className="min-w-full">
+              <thead className="bg-gray-50 border-b border-gray-100 max-sm:px-4">
                 <tr>
-                  <th className={`${thClass} text-left w-16`}>Q.No.</th>
-                  <th className={`${thClass} text-left w-28`}>Status</th>
-                  <th className={`${thClass} text-left`}>Chapter</th>
-                  <th className={`${thClass} text-left w-56`}>Reason</th>
-                  <th className={`${thClass} text-center w-24`}>Action</th>
+                  <th className={`${thClass} text-left w-16 max-sm:px-4`}>Q.No.</th>
+                  <th className={`${thClass} text-left w-28 max-sm:px-4`}>Status</th>
+                  <th className={`${thClass} text-left max-sm:px-4`}>Chapter</th>
+                  <th className={`${thClass} text-left w-56 max-sm:px-4`}>Reason</th>
+                  <th className={`${thClass} text-center w-24 max-sm:px-4`}>Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {rows.map(q => (
                   <tr key={q.questionNo}>
-                    <td className={tdClass}>
+                    <td className={`${tdClass} max-sm:px-4`}>
                       <button
                         onClick={() => onOpenQuestion?.(q.subject, q.questionId)}
                         className={`font-bold text-gray-900 ${onOpenQuestion ? 'hover:underline hover:text-blue-600' : ''}`}
@@ -125,9 +127,9 @@ const FixItZoneSection = ({ analysis, onSaveReason, onFixIt, onOpenQuestion, onP
                         Q{q.questionNo}
                       </button>
                     </td>
-                    <td className={tdClass}><StatusPill status={q.status as 'incorrect' | 'unanswered'} /></td>
-                    <td className={`${tdClass} text-gray-600`}>{q.chapter.join(', ')}</td>
-                    <td className={tdClass}>
+                    <td className={`${tdClass} max-sm:px-4`}><StatusPill status={q.status as 'incorrect' | 'unanswered'} /></td>
+                    <td className={`${tdClass} text-gray-600 max-sm:px-4`}>{q.chapter.join(', ')}</td>
+                    <td className={`${tdClass} max-sm:px-4`}>
                       <select
                         value={reasons[q.questionNo] || ''}
                         disabled={!!readOnly || !!saving[q.questionNo]}
@@ -143,7 +145,7 @@ const FixItZoneSection = ({ analysis, onSaveReason, onFixIt, onOpenQuestion, onP
                         <p className="text-[11px] text-red-600 font-bold mt-1">Couldn't save</p>
                       )}
                     </td>
-                    <td className={`${tdClass} text-center`}>
+                    <td className={`${tdClass} text-center max-sm:px-4`}>
                       <button
                         onClick={() => onFixIt(q.questionNo, `Q${q.questionNo} · ${q.subject} · ${q.chapter.join(', ')}`)}
                         className="inline-flex items-center gap-0.5 text-indigo-700 text-xs font-bold hover:underline whitespace-nowrap"
@@ -158,6 +160,7 @@ const FixItZoneSection = ({ analysis, onSaveReason, onFixIt, onOpenQuestion, onP
                 ))}
               </tbody>
             </table>
+</ResponsiveTable>
           </div>
         </div>
       ))}

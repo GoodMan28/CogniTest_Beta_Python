@@ -2,6 +2,7 @@ import { Fragment, useMemo, useState } from 'react';
 import type { ReportAnalysis } from '../../types/reportAnalysis';
 import { subjectColor } from '../../types/reportAnalysis';
 import SectionCard, { fmtPct, pctTone, tdClass, thClass } from './SectionCard';
+import ResponsiveTable from '../ui/ResponsiveTable';
 
 interface Props {
   analysis: ReportAnalysis;
@@ -52,14 +53,15 @@ const DrillDownSection = ({ analysis, defaultExpanded }: Props) => {
               <h4 className="text-base font-black text-gray-800">{s.label}</h4>
             </div>
             <div className="overflow-x-auto rounded-lg border border-gray-100">
-              <table className="w-full">
-                <thead className="bg-gray-50 border-b border-gray-100">
+              <ResponsiveTable>
+<table className="min-w-full">
+                <thead className="bg-gray-50 border-b border-gray-100 max-sm:px-4">
                   <tr>
-                    <th className={`${thClass} text-left`}>Chapter</th>
-                    <th className={`${thClass} text-center w-20`}>Correct</th>
-                    <th className={`${thClass} text-center w-20`}>Incorrect</th>
-                    <th className={`${thClass} text-center w-20`}>Skipped</th>
-                    <th className={`${thClass} text-center w-24`}>Accuracy</th>
+                    <th className={`${thClass} text-left max-sm:px-4`}>Chapter</th>
+                    <th className={`${thClass} text-center w-20 max-sm:px-4`}>Correct</th>
+                    <th className={`${thClass} text-center w-20 max-sm:px-4`}>Incorrect</th>
+                    <th className={`${thClass} text-center w-20 max-sm:px-4`}>Skipped</th>
+                    <th className={`${thClass} text-center w-24 max-sm:px-4`}>Accuracy</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
@@ -68,31 +70,31 @@ const DrillDownSection = ({ analysis, defaultExpanded }: Props) => {
                     return (
                       <Fragment key={chapter.key}>
                         <tr className="cursor-pointer hover:bg-gray-50" onClick={() => toggle(chapter.key)}>
-                          <td className={`${tdClass} font-medium text-gray-900 whitespace-normal`}>
+                          <td className={`${tdClass} font-medium text-gray-900 whitespace-normal max-sm:px-4`}>
                             <span className="material-symbols-outlined text-[16px] align-middle mr-1 text-gray-400">
                               {isOpen ? 'expand_more' : 'chevron_right'}
                             </span>
                             {chapter.label}
                           </td>
-                          <td className={`${tdClass} text-center font-black text-green-600`}>{chapter.correct}</td>
-                          <td className={`${tdClass} text-center font-black text-red-500`}>{chapter.incorrect}</td>
-                          <td className={`${tdClass} text-center font-black text-amber-500`}>{chapter.skipped}</td>
-                          <td className={`${tdClass} text-center font-black ${pctTone(chapter.accuracyPct)}`}>{fmtPct(chapter.accuracyPct)}</td>
+                          <td className={`${tdClass} text-center font-black text-green-600 max-sm:px-4`}>{chapter.correct}</td>
+                          <td className={`${tdClass} text-center font-black text-red-500 max-sm:px-4`}>{chapter.incorrect}</td>
+                          <td className={`${tdClass} text-center font-black text-amber-500 max-sm:px-4`}>{chapter.skipped}</td>
+                          <td className={`${tdClass} text-center font-black ${pctTone(chapter.accuracyPct)} max-sm:px-4`}>{fmtPct(chapter.accuracyPct)}</td>
                         </tr>
                         {isOpen && (
                           chapter.topics.length > 0 ? (
                             chapter.topics.map(topic => (
                               <tr key={`${chapter.key}::${topic.key}`} className="bg-gray-50">
-                                <td className={`${tdClass} pl-10 text-xs text-gray-600 italic whitespace-normal`}>↳ {topic.label}</td>
-                                <td className={`${tdClass} text-center text-xs text-green-500`}>{topic.correct}</td>
-                                <td className={`${tdClass} text-center text-xs text-red-500`}>{topic.incorrect}</td>
-                                <td className={`${tdClass} text-center text-xs text-amber-500`}>{topic.skipped}</td>
-                                <td className={`${tdClass} text-center text-xs ${pctTone(topic.accuracyPct)}`}>{fmtPct(topic.accuracyPct)}</td>
+                                <td className={`${tdClass} pl-10 text-xs text-gray-600 italic whitespace-normal max-sm:px-4`}>↳ {topic.label}</td>
+                                <td className={`${tdClass} text-center text-xs text-green-500 max-sm:px-4`}>{topic.correct}</td>
+                                <td className={`${tdClass} text-center text-xs text-red-500 max-sm:px-4`}>{topic.incorrect}</td>
+                                <td className={`${tdClass} text-center text-xs text-amber-500 max-sm:px-4`}>{topic.skipped}</td>
+                                <td className={`${tdClass} text-center text-xs ${pctTone(topic.accuracyPct)} max-sm:px-4`}>{fmtPct(topic.accuracyPct)}</td>
                               </tr>
                             ))
                           ) : (
                             <tr key={`${chapter.key}::empty`} className="bg-gray-50">
-                              <td colSpan={5} className={`${tdClass} pl-10 text-xs text-gray-400 italic`}>No topic tags on these questions.</td>
+                              <td colSpan={5} className={`${tdClass} pl-10 text-xs text-gray-400 italic max-sm:px-4`}>No topic tags on these questions.</td>
                             </tr>
                           )
                         )}
@@ -101,6 +103,7 @@ const DrillDownSection = ({ analysis, defaultExpanded }: Props) => {
                   })}
                 </tbody>
               </table>
+</ResponsiveTable>
             </div>
             <p className="text-[10px] text-gray-400 mt-1.5">
               A question tagged with several chapters is counted in each — chapter totals can exceed the subject total.

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import adminApi from '../api/adminApi';
 import { useAuth } from '../context/AuthContext';
+import { PageContainer } from '../components/ui/PageContainer';
 
 const StudentAnalytics = () => {
   const { id } = useParams();
@@ -236,7 +237,7 @@ const StudentAnalytics = () => {
   const filteredWeaknesses = analytics?.swotProfile?.[selectedSubject]?.criticalWeaknesses || [];
 
   return (
-    <div className="flex flex-col min-w-0 w-full p-8">
+    <PageContainer>
       
       <header className="flex justify-between items-center mb-8 bg-white p-6 rounded-xl border border-gray-200 shadow-sm relative overflow-hidden">
         <div className="absolute inset-0 border-2 border-transparent bg-gradient-to-r from-blue-500 to-indigo-500 opacity-10 pointer-events-none rounded-xl" style={{"WebkitMask":"linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)","WebkitMaskComposite":"xor","maskComposite":"exclude","padding":"2px"}}></div>
@@ -589,7 +590,7 @@ const StudentAnalytics = () => {
           </section>
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

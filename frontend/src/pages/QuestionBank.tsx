@@ -48,6 +48,8 @@ const stripLatex = (text: string): string => {
 };
 
 import MarkdownText from '../components/MarkdownText';
+import ResponsiveTable from '../components/ui/ResponsiveTable';
+import { PageContainer } from '../components/ui/PageContainer';
 
 const QuestionBank = () => {
   const [activeSubject, setActiveSubject] = useState<Subject>('Physics');
@@ -143,7 +145,7 @@ const QuestionBank = () => {
   const colors = SUBJECT_COLORS[activeSubject];
 
   return (
-    <div className="flex flex-col min-w-0 w-full p-8 overflow-hidden">
+    <PageContainer>
       {/* Header */}
       <div className="mb-6">
         <h2 className="text-3xl font-bold text-gray-800 tracking-tight">Question Bank</h2>
@@ -233,7 +235,8 @@ const QuestionBank = () => {
       {/* Questions Table — only 3 columns: #, Question, Topics */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex-1 min-h-0">
         <div className="overflow-auto max-h-[calc(100vh-340px)]">
-          <table className="w-full text-left border-collapse table-fixed">
+          <ResponsiveTable>
+<table className="min-w-full text-left border-collapse ">
             <thead className="sticky top-0 z-10">
               <tr className="bg-gray-50/95 border-b border-gray-200 backdrop-blur-sm">
                 <th className="p-4 text-xs font-bold text-gray-500 uppercase tracking-wider w-16">#</th>
@@ -486,6 +489,7 @@ const QuestionBank = () => {
               )}
             </tbody>
           </table>
+</ResponsiveTable>
         </div>
       </div>
 
@@ -569,7 +573,7 @@ const QuestionBank = () => {
           </div>
         </div>
       )}
-    </div>
+    </PageContainer>
   );
 };
 

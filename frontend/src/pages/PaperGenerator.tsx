@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import TemplateBuilder from './generator/TemplateBuilder';
 import PaperComposer from './generator/PaperComposer';
 import adminApi from '../api/adminApi';
+import { PageContainer } from '../components/ui/PageContainer';
+import { PageHeader } from '../components/ui/PageHeader';
 
 export type TemplateSection = {
   id: string;
@@ -54,30 +56,29 @@ export default function PaperGenerator() {
   };
 
   return (
-    <div className="flex-1 bg-[#FAFAFA] min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">
-            {step === 1 ? 'Template Creation' : 'Compose Question Paper'}
-          </h1>
-          <p className="text-sm text-gray-500 mt-1">
-            {step === 1 
-              ? 'Define the blueprint for your test by adding sections and criteria.' 
-              : 'Select questions from the database to fulfill the template requirements.'}
-          </p>
-        </div>
+    <PageContainer>
+      <PageHeader 
+        title="Paper Generator"
+        subtitle="Design test structures and automatically populate questions."
+      />
+      <div className="max-w-7xl mx-auto">
+        <p className="text-sm text-gray-500 mt-1 mb-6">
+          {step === 1 
+            ? 'Define the blueprint for your test by adding sections and criteria.' 
+            : 'Select questions from the database to fulfill the template requirements.'}
+        </p>
 
         {step === 1 && (
-        <TemplateBuilder 
-          onComplete={handleTemplateCreated} 
-          onSaveOnly={handleTemplateSaved}
-        />
-      )}
+          <TemplateBuilder 
+            onComplete={handleTemplateCreated} 
+            onSaveOnly={handleTemplateSaved}
+          />
+        )}
         
         {step === 2 && template && (
           <PaperComposer template={template} onBack={() => setStep(1)} />
         )}
       </div>
-    </div>
+    </PageContainer>
   );
 }

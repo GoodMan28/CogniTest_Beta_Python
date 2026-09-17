@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { PageContainer } from '../components/ui/PageContainer';
 
 
 const StudentTests = () => {
@@ -31,7 +32,7 @@ const StudentTests = () => {
   }
 
   return (
-    <div className="flex flex-col min-w-0 w-full p-8 bg-gray-50/50 min-h-screen">
+    <PageContainer>
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-gray-800 tracking-tight">Mock Tests Library</h2>
         <p className="text-gray-500 mt-1">Browse and download available practice tests.</p>
@@ -76,7 +77,7 @@ const StudentTests = () => {
           )}
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

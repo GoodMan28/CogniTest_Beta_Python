@@ -1,4 +1,5 @@
 import type { ReportDetailDTO } from '../../types/demoAnalysis';
+import ResponsiveTable from '../ui/ResponsiveTable';
 
 interface QuestionTypeMarksTableProps {
   report: ReportDetailDTO;
@@ -60,7 +61,8 @@ const QuestionTypeMarksTable = ({ report }: QuestionTypeMarksTableProps) => {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
+        <ResponsiveTable>
+<table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
@@ -98,6 +100,7 @@ const QuestionTypeMarksTable = ({ report }: QuestionTypeMarksTableProps) => {
             </tr>
           </tbody>
         </table>
+</ResponsiveTable>
       </div>
     </div>
   );

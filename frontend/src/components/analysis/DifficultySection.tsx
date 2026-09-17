@@ -2,6 +2,7 @@ import type { ReportAnalysis } from '../../types/reportAnalysis';
 import { STATUS_COLORS } from '../../types/reportAnalysis';
 import GroupedBarChart from '../charts/GroupedBarChart';
 import SectionCard, { fmtPct, marksTone, pctTone, tdClass, thClass } from './SectionCard';
+import ResponsiveTable from '../ui/ResponsiveTable';
 
 interface Props {
   analysis: ReportAnalysis;
@@ -48,32 +49,34 @@ const DifficultySection = ({ analysis }: Props) => {
       </div>
 
       <div className="overflow-x-auto rounded-lg border border-gray-100 mb-8">
-        <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-100">
+        <ResponsiveTable>
+<table className="min-w-full">
+          <thead className="bg-gray-50 border-b border-gray-100 max-sm:px-4">
             <tr>
-              <th className={`${thClass} text-left`}>Level</th>
-              <th className={`${thClass} text-center`}>Correct</th>
-              <th className={`${thClass} text-center`}>Incorrect</th>
-              <th className={`${thClass} text-center`}>Unattempted</th>
-              <th className={`${thClass} text-center`}>Accuracy %</th>
-              <th className={`${thClass} text-center`}>Attempt %</th>
-              <th className={`${thClass} text-center`}>Marks</th>
+              <th className={`${thClass} text-left max-sm:px-4`}>Level</th>
+              <th className={`${thClass} text-center max-sm:px-4`}>Correct</th>
+              <th className={`${thClass} text-center max-sm:px-4`}>Incorrect</th>
+              <th className={`${thClass} text-center max-sm:px-4`}>Unattempted</th>
+              <th className={`${thClass} text-center max-sm:px-4`}>Accuracy %</th>
+              <th className={`${thClass} text-center max-sm:px-4`}>Attempt %</th>
+              <th className={`${thClass} text-center max-sm:px-4`}>Marks</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
             {difficulty.overall.map(b => (
               <tr key={b.key}>
-                <td className={`${tdClass} font-bold text-gray-900`}>{b.label}</td>
-                <td className={`${tdClass} text-center font-black text-green-700`}>{b.correct}</td>
-                <td className={`${tdClass} text-center font-black text-red-600`}>{b.incorrect}</td>
-                <td className={`${tdClass} text-center font-black text-gray-500`}>{b.skipped}</td>
-                <td className={`${tdClass} text-center font-black ${pctTone(b.accuracyPct)}`}>{fmtPct(b.accuracyPct)}</td>
-                <td className={`${tdClass} text-center font-black ${pctTone(b.attemptPct)}`}>{fmtPct(b.attemptPct)}</td>
-                <td className={`${tdClass} text-center font-black ${marksTone(b.score)}`}>{b.score}<span className="text-gray-400 text-xs font-medium">/{b.maxMarks}</span></td>
+                <td className={`${tdClass} font-bold text-gray-900 max-sm:px-4`}>{b.label}</td>
+                <td className={`${tdClass} text-center font-black text-green-700 max-sm:px-4`}>{b.correct}</td>
+                <td className={`${tdClass} text-center font-black text-red-600 max-sm:px-4`}>{b.incorrect}</td>
+                <td className={`${tdClass} text-center font-black text-gray-500 max-sm:px-4`}>{b.skipped}</td>
+                <td className={`${tdClass} text-center font-black ${pctTone(b.accuracyPct)} max-sm:px-4`}>{fmtPct(b.accuracyPct)}</td>
+                <td className={`${tdClass} text-center font-black ${pctTone(b.attemptPct)} max-sm:px-4`}>{fmtPct(b.attemptPct)}</td>
+                <td className={`${tdClass} text-center font-black ${marksTone(b.score)} max-sm:px-4`}>{b.score}<span className="text-gray-400 text-xs font-medium">/{b.maxMarks}</span></td>
               </tr>
             ))}
           </tbody>
         </table>
+</ResponsiveTable>
       </div>
 
       {Object.keys(difficulty.bySubject).length > 0 && (

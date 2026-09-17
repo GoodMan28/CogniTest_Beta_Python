@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import adminApi from '../api/adminApi';
 import { useNavigate } from 'react-router-dom';
-
+import ResponsiveTable from '../components/ui/ResponsiveTable';
+import { PageContainer } from '../components/ui/PageContainer';
+import { PageHeader } from '../components/ui/PageHeader';
 const Tests = () => {
   const [activeTab, setActiveTab] = useState<'create' | 'upload' | 'generate'>('create');
   const [tests, setTests] = useState<any[]>([]);
@@ -195,13 +197,11 @@ const Tests = () => {
   };
 
   return (
-    <div className="flex flex-col min-w-0 w-full p-6">
-      <div className="flex justify-between items-end mb-6">
-        <div>
-          <h2 className="text-3xl font-bold text-gray-800 tracking-tight">Test Management</h2>
-          <p className="text-gray-500 mt-1">Ingest new test papers and evaluate OMR batches.</p>
-        </div>
-      </div>
+    <PageContainer>
+      <PageHeader 
+        title="Test Management"
+        subtitle="Ingest question papers and evaluate student response sheets."
+      />
 
       <div className="flex border-b border-gray-200 mb-6">
         <button 
@@ -462,7 +462,8 @@ const Tests = () => {
                    <p className="text-sm text-gray-500 text-center mb-6">5 student OMR sheets successfully processed.</p>
                    
                    <div className="border border-gray-200 rounded-lg overflow-x-auto mb-6 bg-white">
-                     <table className="w-full text-left text-xs">
+                     <ResponsiveTable>
+<table className="min-w-full text-left text-xs">
                        <thead className="bg-gray-50 text-gray-500 uppercase tracking-wider font-semibold">
                          <tr>
                            <th className="p-3">Student Name</th>
@@ -484,6 +485,7 @@ const Tests = () => {
                          ))}
                        </tbody>
                      </table>
+</ResponsiveTable>
                    </div>
 
                    <button 
@@ -617,7 +619,7 @@ const Tests = () => {
           </div>
         </div>
       )}
-    </div>
+    </PageContainer>
   );
 };
 

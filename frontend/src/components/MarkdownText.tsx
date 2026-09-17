@@ -3,6 +3,7 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import type { Components } from 'react-markdown';
+import ResponsiveTable from '../components/ui/ResponsiveTable';
 
 /**
  * The only text transformation permitted before handing source to ReactMarkdown.
@@ -25,8 +26,10 @@ const normalize = (source: string): string => {
 const components: Components = {
   p: ({ children }) => <span className="inline">{children}</span>,
   table: ({ children }) => (
-    <div className="overflow-x-auto">
-      <table>{children}</table>
+    <div className="overflow-x-auto w-full max-w-full print:overflow-visible">
+      <ResponsiveTable>
+        <table>{children}</table>
+      </ResponsiveTable>
     </div>
   ),
   img: ({ ...props }) => <img {...props} style={{ maxWidth: '100%' }} />,

@@ -5,6 +5,7 @@ import QuestionPickerModal from './QuestionPickerModal';
 import adminApi from '../../api/adminApi';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import ResponsiveTable from '../../components/ui/ResponsiveTable';
 
 interface Props {
   template: PaperTemplate;
@@ -140,7 +141,8 @@ export default function PaperComposer({ template, onBack }: Props) {
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-sm text-left">
+          <ResponsiveTable>
+<table className="min-w-full text-sm text-left">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b">
               <tr>
                 <th className="px-6 py-4">Subject</th>
@@ -188,6 +190,7 @@ export default function PaperComposer({ template, onBack }: Props) {
               })}
             </tbody>
           </table>
+</ResponsiveTable>
         </div>
       </div>
 

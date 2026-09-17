@@ -120,12 +120,13 @@ const TestimonialsCarousel = () => {
           {/* Testimonials */}
           <div className="max-w-4xl mx-auto">
             {/* Cards */}
-            <div className="relative" style={{ minHeight: '220px' }}>
+            <div className="grid" style={{ gridTemplateColumns: '1fr', gridTemplateAreas: '"stack"' }}>
               {testimonials.map((t, i) => (
                 <div
                   key={i}
-                  className="testimonial-card absolute inset-0 p-8 rounded-2xl"
+                  className="testimonial-card p-6 sm:p-8 rounded-2xl"
                   style={{
+                    gridArea: 'stack',
                     opacity: i === activeIndex ? 1 : 0,
                     transform: i === activeIndex ? 'translateY(0) scale(1)' : 'translateY(10px) scale(0.98)',
                     pointerEvents: i === activeIndex ? 'auto' : 'none',
@@ -164,7 +165,7 @@ const TestimonialsCarousel = () => {
             </div>
 
             {/* Dots */}
-            <div className="flex justify-center gap-2 mt-72 sm:mt-56">
+            <div className="flex justify-center gap-2 mt-8">
               {testimonials.map((_, i) => (
                 <button
                   key={i}

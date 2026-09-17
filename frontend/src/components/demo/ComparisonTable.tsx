@@ -1,4 +1,5 @@
 import type { ReportDetailDTO } from '../../types/demoAnalysis';
+import ResponsiveTable from '../ui/ResponsiveTable';
 
 interface ComparisonTableProps {
   report: ReportDetailDTO;
@@ -23,7 +24,8 @@ const ComparisonTable = ({ report }: ComparisonTableProps) => {
         {comparisons.cohortLabel} · {comparisons.cohortSize} evaluated students
       </p>
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
+        <ResponsiveTable>
+<table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
               <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
@@ -43,6 +45,7 @@ const ComparisonTable = ({ report }: ComparisonTableProps) => {
             ))}
           </tbody>
         </table>
+</ResponsiveTable>
       </div>
       <p className="text-[11px] text-gray-400 mt-3">
         Computed {new Date(comparisons.computedAt).toLocaleString()}
