@@ -51,7 +51,7 @@ const ChapterTests = () => {
   const [timed, setTimed] = useState(false);
 
   // Mode state
-  const [testMode, setTestMode] = useState<'swot' | 'custom'>('custom');
+  const [testMode] = useState<'swot' | 'custom'>('custom');
   const [taxonomy, setTaxonomy] = useState<{ units: string[], chapters: string[], topics: string[] }>({ units: [], chapters: [], topics: [] });
   const [selectedUnits, setSelectedUnits] = useState<string[]>([]);
   const [selectedChapters, setSelectedChapters] = useState<string[]>([]);
@@ -216,7 +216,7 @@ const ChapterTests = () => {
       <div className="flex flex-col min-w-0 w-full p-8">
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-gray-800 tracking-tight">Chapter-wise Practice</h2>
-          <p className="text-gray-500 mt-1">Generate a personalized test targeting your weak areas using vector similarity search.</p>
+          <p className="text-gray-500 mt-1">Create topic-wise and chapter-wise tests so you can focus your practice exactly where you need it.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -241,29 +241,6 @@ const ChapterTests = () => {
                 </div>
               </h3>
 
-              {/* Mode Toggle */}
-              <div className="mb-6 bg-gray-50 p-1.5 rounded-lg flex gap-1 border border-gray-200">
-                <button
-                  onClick={() => setTestMode('swot')}
-                  className={`flex-1 py-2 text-xs font-bold rounded-md transition-all duration-200 ${
-                    testMode === 'swot' 
-                      ? 'bg-white text-gray-800 shadow-sm border border-gray-200' 
-                      : 'text-gray-500 hover:text-gray-700'
-                  }`}
-                >
-                  AI Weakness Test
-                </button>
-                <button
-                  onClick={() => setTestMode('custom')}
-                  className={`flex-1 py-2 text-xs font-bold rounded-md transition-all duration-200 ${
-                    testMode === 'custom' 
-                      ? 'bg-white text-gray-800 shadow-sm border border-gray-200' 
-                      : 'text-gray-500 hover:text-gray-700'
-                  }`}
-                >
-                  Custom Filter Test
-                </button>
-              </div>
 
               {/* Subject Selection */}
               <div className="mb-6">
@@ -343,8 +320,7 @@ const ChapterTests = () => {
               </div>
 
               {/* Custom Mode Filters */}
-              {testMode === 'custom' && (
-                <div className="mb-6 pt-4 border-t border-gray-100 relative">
+              <div className="mb-6 pt-4 border-t border-gray-100 relative">
                   <div className="space-y-4">
                     <div>
                       <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Chapters</label>
@@ -390,15 +366,13 @@ const ChapterTests = () => {
                     </div>
                   </div>
                 </div>
-              )}
-
               {/* Generate Button */}
               <button
                 onClick={handleGenerate}
                 disabled={isLocked}
                 className={`w-full py-3.5 bg-gradient-to-r ${theme.gradient} text-white rounded-xl font-bold text-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-md disabled:opacity-50 disabled:cursor-not-allowed`}
               >
-                {isLocked ? 'Locked' : (testMode === 'custom' ? 'Generate Custom Test' : 'Generate AI Test')}
+                {isLocked ? 'Locked' : 'Generate Practice Test'}
               </button>
             </div>
           </div>
@@ -418,55 +392,29 @@ const ChapterTests = () => {
               </div>
 
               <h3 className="text-xl font-bold text-gray-800 mb-4">How It Works</h3>
-              {testMode === 'swot' ? (
-                <div className="max-w-md space-y-4 text-left">
-                  <div className="flex gap-3 items-start">
-                    <span className={`w-7 h-7 rounded-full ${theme.bg} ${theme.text} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5`}>1</span>
-                    <div>
-                      <p className="text-sm font-semibold text-gray-700">SWOT Analysis</p>
-                      <p className="text-xs text-gray-500">Your critical weaknesses are identified from past test evaluations.</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-3 items-start">
-                    <span className={`w-7 h-7 rounded-full ${theme.bg} ${theme.text} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5`}>2</span>
-                    <div>
-                      <p className="text-sm font-semibold text-gray-700">Vector Similarity Search</p>
-                      <p className="text-xs text-gray-500">Questions similar to what you got wrong are found using AI embeddings in Pinecone.</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-3 items-start">
-                    <span className={`w-7 h-7 rounded-full ${theme.bg} ${theme.text} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5`}>3</span>
-                    <div>
-                      <p className="text-sm font-semibold text-gray-700">Smart Filtering</p>
-                      <p className="text-xs text-gray-500">Already-seen questions are excluded. Only unseen questions from weak chapters are selected.</p>
-                    </div>
+              <div className="max-w-md space-y-4 text-left">
+                <div className="flex gap-3 items-start">
+                  <span className={`w-7 h-7 rounded-full ${theme.bg} ${theme.text} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5`}>1</span>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-700">Custom Filtering</p>
+                    <p className="text-xs text-gray-500">You hand-pick the chapters and topics you want to practice.</p>
                   </div>
                 </div>
-              ) : (
-                <div className="max-w-md space-y-4 text-left">
-                  <div className="flex gap-3 items-start">
-                    <span className={`w-7 h-7 rounded-full ${theme.bg} ${theme.text} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5`}>1</span>
-                    <div>
-                      <p className="text-sm font-semibold text-gray-700">Custom Filtering</p>
-                      <p className="text-xs text-gray-500">You hand-pick the chapters and topics you want to practice.</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-3 items-start">
-                    <span className={`w-7 h-7 rounded-full ${theme.bg} ${theme.text} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5`}>2</span>
-                    <div>
-                      <p className="text-sm font-semibold text-gray-700">Randomized Selection</p>
-                      <p className="text-xs text-gray-500">The system randomly selects questions that match your exact filters.</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-3 items-start">
-                    <span className={`w-7 h-7 rounded-full ${theme.bg} ${theme.text} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5`}>3</span>
-                    <div>
-                      <p className="text-sm font-semibold text-gray-700">Focused Practice</p>
-                      <p className="text-xs text-gray-500">Perfect for revising specific syllabus chunks before an exam.</p>
-                    </div>
+                <div className="flex gap-3 items-start">
+                  <span className={`w-7 h-7 rounded-full ${theme.bg} ${theme.text} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5`}>2</span>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-700">Randomized Selection</p>
+                    <p className="text-xs text-gray-500">The system randomly selects questions that match your exact filters.</p>
                   </div>
                 </div>
-              )}
+                <div className="flex gap-3 items-start">
+                  <span className={`w-7 h-7 rounded-full ${theme.bg} ${theme.text} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5`}>3</span>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-700">Focused Practice</p>
+                    <p className="text-xs text-gray-500">Perfect for revising specific syllabus chunks before an exam.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
