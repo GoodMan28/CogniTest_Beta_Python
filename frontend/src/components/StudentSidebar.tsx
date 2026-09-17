@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Beaker, FileOutput, Settings, Library, LogOut, X } from 'lucide-react';
+import { LayoutDashboard, Beaker, FileOutput, Settings, Library, LogOut, X, BookOpen } from 'lucide-react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
@@ -19,6 +19,7 @@ const StudentSidebar = ({ isOpen, onClose }: { isOpen?: boolean; onClose?: () =>
     { name: 'My Dashboard', path: '/student', icon: LayoutDashboard },
     { name: 'My Reports', path: '/student/reports', icon: FileOutput },
     { name: 'Custom Tests', path: '/student/custom-tests', icon: Beaker },
+    { name: 'Chapter-wise Practice', path: '/student/chapter-tests', icon: BookOpen },
     { name: 'Mock Tests Library', path: '/student/tests', icon: Library },
     { name: 'Settings', path: '/student/settings', icon: Settings },
   ];

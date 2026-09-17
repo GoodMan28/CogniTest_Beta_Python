@@ -7,6 +7,7 @@ import AdminLayout from './components/AdminLayout';
 import StudentLayout from './components/StudentLayout';
 import Dashboard from './pages/Dashboard';
 import CustomTests from './pages/CustomTests';
+import ChapterTests from './pages/ChapterTests';
 import StudentProfile from './pages/StudentProfile';
 import StudentDirectory from './pages/StudentDirectory';
 import Tests from './pages/Tests';
@@ -82,6 +83,7 @@ function App() {
                 <Route element={<StudentLayout />}>
                   <Route index element={<StudentProfile />} />
                   <Route path="custom-tests" element={<CustomTests />} />
+                  <Route path="chapter-tests" element={<ChapterTests />} />
                   <Route path="tests" element={<StudentTests />} />
                   <Route path="reports" element={<Reports />} />
                   <Route path="settings" element={<StudentSettings />} />
